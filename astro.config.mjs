@@ -8,8 +8,20 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Hetzner Server Instruction',
+			defaultLocale: "root",
+			locales: {
+				root: {
+					label: "English",
+					lang: "en",
+				},
+				de : {
+					label: "Deutsch",
+					lang: "de",
+				}
+			},
 			social: {
 				github: 'https://github.com/grew-development/serverdocs',
+				email: 'mailto:info@grew-development.de',
 			},
 			sidebar: [
 				{
