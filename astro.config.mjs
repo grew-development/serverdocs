@@ -29,6 +29,7 @@ export default defineConfig({
 					items: [
 						// Each item here is one entry in the navigation menu.
 						{ label: 'Instruction', link: '/getting-started/1-instruction/' },
+						{ label: 'FAQ (coming soon)', link: '/getting-started/2-faq/' },
 					],
 				},
 				
