@@ -1,0 +1,54 @@
+---
+title: OPNSense Update & Plugins
+author: Sven Rönnfranz alias Grewo
+description: Setup for the basic OPNSense configuration
+---
+
+import { Aside } from "@astrojs/starlight/components";
+
+Next I update OPNSense and install the QEMU Guest Agent.<br/>
+This is important because otherwise proxmox cannot shutdown the OPNSense when proxmox needs to reboot.
+You also would not be able to stop OPNSense from Proxmox manually or restart it if the QEMU Guest Agent is not installed.
+
+## Updating OPNSense
+<Aside type="caution">
+If the following steps do not work, or if nothing is displayed under `System > Firmware > Status`
+after five minutes, you should check your Internet connection.
+It may be that your OPNSense does not have Internet access to update the system.
+
+Then it is best to check your Internet settings that you have set under [Configure OPNSense](/setups/2-installing-opnsense/4-configure-opnsense).
+
+</Aside>
+
+
+You should regullary update your OPNSense because it handels most of your server traffic and
+its the most vulnerable point of your server. I would suggest running updates at least once a week or
+if you dont run critical stuff on your server atleast once in a month.
+
+* Go to `System > Firmware > Status`
+* Should be able to `Check for updates` (It should redirect you to the `Update-Tab`.)
+* Scroll down and click `Update`#
+* Confirm by clicking `Ok`
+
+After that OPNSense should automatically download and install the updates.
+Sometimes OPNSense will need to restart after certain updates. Sometimes it will update the packages inplace.<br/>
+If you are using localhost to connect via SSH Tunnel you may need to disable the firewall after that again.
+
+## Installing QEMU-Guest-Agent
+We need to install the QEMU-Agent Plugin to OPNSense.<br/>
+As I already mentioned we need this plugin for the communication between
+our server (Proxmox) and opnsense.
+
+To install the QEMU Quest Agent you need to head to the Plugins section<br/>
+`System > Firmware > Plugins`. There you will have to search for os-qemu-guest-agent and click the
+plus icon on the right.
+
+This will install the QEMU-Guest-Agent.
+
+In some cases the QEMU-Guest-Agent will not start automatically. You can check if it is running
+under Lobby/Dashbaord. You should be able to see the QEMU-Guest-Agent in the Services Section.
+If it has a red stopped icon you can click the play button to start it.
+After that the icon should turn green, indicating that the QEMU-Guest-Agent is running.
+
+Congratulations you have now installed opnsense on your server and <br/>
+configured the necessary things for further use!

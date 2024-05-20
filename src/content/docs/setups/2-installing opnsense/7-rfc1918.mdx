@@ -1,0 +1,26 @@
+---
+title: RFC1918 Alias
+author: Sven Rönnfranz alias Grewo
+description: Create the RFC1918-Rule with alias
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Next, I create an alias for RFC1918. <br/>
+RFC1918 normally stands for all private IP addresses in your local network.
+
+In my setup, this alias is used for rules that allow internet access for a specific VLAN, except for
+anything inside RFC1918. This makes it much easier to create internet access rules for the VLANs.
+
+* Go to `Firewall > Aliases`
+* Hit the Plus-Symbol
+* Enter the name `RFC1918`
+* Choose type as `networks(s)`
+* Selected content `__wan_network__` (In future all those beginning with __)
+
+<Aside type="caution">
+Make sure to update this alias every time you add a new network/interface to your OPNSense
+otherwise VLAN’s could access devices on the connected network.
+</Aside>

@@ -53,6 +53,8 @@ export default defineConfig({
 								{ label: 'Installing OPNSense', link: '/setups/2-installing-opnsense/3-installing-opnsense' },
 								{ label: 'Basic OPNSense Configuration', link: '/setups/2-installing-opnsense/4-configure-opnsense' },
 								{ label: 'OPNSense Setup', link: '/setups/2-installing-opnsense/5-opnsense-setup' },
+								{ label: 'OPNSense Update & Plugins', link: '/setups/2-installing-opnsense/6-update-plugin' },
+								{ label: 'RFC1918 Alias', link: '/setups/2-installing-opnsense/7-rfc1918' },
 							],
 						},
 					],
