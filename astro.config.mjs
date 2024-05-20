@@ -27,10 +27,20 @@ export default defineConfig({
 				{
 					label: 'Getting Started',
 					items: [
-						// Each item here is one entry in the navigation menu.
 						{ label: 'Instruction', link: '/getting-started/1-instruction/' },
 						{ label: 'FAQ (coming soon)', link: '/getting-started/2-faq/' },
 						{ label: 'Serverinfos', link: '/getting-started/3-serverinfos/' },
+					],
+				},
+				{
+					label: 'Setups',
+					items: [
+						{
+							label: 'Installing Proxmox',
+							items: [
+								{ label: 'Start Rescue Mode', link: '/setups/1-installing-proxmox/1-hetzner-rescue-mode' },
+							],
+						},
 					],
 				},
 			],
