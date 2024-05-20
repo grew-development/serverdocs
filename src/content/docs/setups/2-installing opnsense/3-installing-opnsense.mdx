@@ -1,0 +1,54 @@
+---
+title: Installing OPNSense
+author: Sven Rönnfranz alias Grewo
+description: Install Steps for OPNSense
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+If you did everything correct you should be able to startup the VM.<br/>
+Go to the `console-tab` to view the screen of opnsense.<br/>
+Click `Start Now`.
+
+Wait until the opnsense installer finishes loading and prompts you with a login. Dont press any other
+buttons during installation otherwise you might need to restart the VM.
+
+Because we want to install opnsense we use `installer` as a username to login and `opnsense` as the
+default password.
+
+The OPNSense Installer will now prompt you with a keymap selection. I selected the `German keymap`,
+because I have a german keyboard. If you want to you can test your keymap at the top of the
+selection. If you are sure you selected the right keymap you can continue.
+
+<Aside type="caution">
+If you select a wrong keymap you may have problems later when entering a password for your root user.
+Because some special symbols can be interpreted differently on different keymaps.
+This can lead to your login only working in the console not the OPNSense WebUI later on.
+</Aside>
+
+Next you have to choose how you want to install opnsense. I used ZFS but you can choose what you like.
+
+After that we select a `stripe installation` because our proxmox has already raid so I don't need raid here anymore.
+
+It will then prompt you to select your drive with spacebar and than enter for confirm.
+
+It will ask you one more time to confirm because you will overwrite everything on the drive.
+Because its only an empty virtual drive we can safely continue by selecting `Yes`.
+
+After that the installation should start. This will take a few minutes depending on your server performance.
+
+After the main installation finished it will prompt you to reset your root password.<br/>
+I selected a secure password for my root user.
+
+<Aside type="note">
+Make sure to remember that password. You will need to enter it in the WebUI and in the opnsense console sometimes.<br/>
+If you forget your password, you will have to reset your entire OPNSense
+</Aside>
+
+After that you can select Complete Install to finish the installation.<br/>
+This will reboot the VM and start of the actual drive now and not the ISO anymore.<br/>
+If you want to you can remove the ISO, but you are not required to.
+
+You should now have the basic installation running on your server.
