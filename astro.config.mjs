@@ -52,6 +52,17 @@ export default defineConfig({
 								{ label: 'Creating OPNSense VM', link: '/setups/2-installing-opnsense/2-creating-opnsense-vm' },
 							],
 						},
+						{
+							label: 'Configs',
+							items: [
+								{
+									label: 'Proxmox',
+									items: [
+										{ label: '/etc/network/interfaces', link: '/setups/1-installing-proxmox/interfaces-file' },
+									],
+								},
+							],
+						},
 					],
 				},
 			],
