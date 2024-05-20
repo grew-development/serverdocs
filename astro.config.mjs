@@ -52,6 +52,7 @@ export default defineConfig({
 								{ label: 'Creating OPNSense VM', link: '/setups/2-installing-opnsense/2-creating-opnsense-vm' },
 								{ label: 'Installing OPNSense', link: '/setups/2-installing-opnsense/3-installing-opnsense' },
 								{ label: 'Basic OPNSense Configuration', link: '/setups/2-installing-opnsense/4-configure-opnsense' },
+								{ label: 'OPNSense Setup', link: '/setups/2-installing-opnsense/5-opnsense-setup' },
 							],
 						},
 					],
