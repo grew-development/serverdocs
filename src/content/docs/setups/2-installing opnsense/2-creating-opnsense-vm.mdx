@@ -1,0 +1,89 @@
+---
+title: Creating OPNSense VM
+author: Sven Rönnfranz alias Grewo
+description: Creating your Virtual MAschine for OPNSense
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+Start by creating a new VM in proxmox.
+I used VM ID 100 to display it at the top because its the first entry point for every request to the server.
+Later I also assign VLAN100 to the opnsense.
+
+Click on the `Create VM` button above and set the VM with the following values.
+I left all values that were not specified as they were or were not specified at the time of creation.
+
+<Aside type="tip">
+    Activate Advanced Mode at the bottom of the window
+</Aside>
+
+### VM Settingvalues
+After creating the VM we will add the vlan network aswell.<br/>
+Now confirm the whole thing in the `Confirm area` and click on the `finish` button.
+
+<Tabs>
+    <TabItem label="General">
+        Node            -   proxmox<br/>
+        VM ID           -   100<br/>
+        Name            -   OPNsense<br/>
+        Start at boot  -   true [Advanced Mode]<br/>
+    </TabItem>
+    <TabItem label="OS">
+        ISO image   -   Choose your iso here<br/>
+        Qemu Agent  -   True (That way proxmox qemu can tell the vm to start, stop and restart when the qemu agent is installed)<br/>
+    </TabItem>
+    <TabItem label="Disk">
+        Disk size   -   10-30 GB (depends on the amount of firewall rules, configs and plugins)<br/>
+    </TabItem>
+    <TabItem label="CPU">
+        Cores           -   2-4 (depends on the network traffic)<br/>
+        Extra CPU Flags -   aes > on<br/>
+    </TabItem>
+    <TabItem label="Memory">
+        Memory  -   3GB-6GB (depends on the network traffic and rules and plugins)<br/>
+        <Aside type="note">
+            You must enter this value in MiB, i.e. 6144 MiB for 6GB
+        </Aside>
+    </TabItem>
+    <TabItem label="Network">
+        Bridge      -   vmbr0 (WAN)<br/>
+        Multiqueue  -   8 (For better performance)<br/>
+    </TabItem>
+</Tabs>
+
+## Post-Create
+<Aside type="note">
+This is only if you are using a setup with a singular IPv4. If you are using two, vmbr1 will be your<br/>
+second WAN and you will have to add it the same way as the first WAN.<br/>
+Then you can follow the next steps with vmbr2 which will then be your VLAN interface.
+</Aside>
+
+We will need to add the VLAN Network now aswell.<br/>
+* Select the OPNsense VM in Proxmox Web Interface
+* Go to the `Hardware`-Settings
+* Click `Add` and Select `Network-Device`
+
+Make sure `Advanced` is enabled again to see all settings.
+
+### Network Device Settingvalues
+* Bridge      -   vmbr1 (VLAN-Network)<br/>
+* VLAN Tag    -   100 (The same as the VM ID)<br/>
+* Multiqueue  -   8 (For better performance)<br/>
+
+## Trunking
+Now we also need to tell Proxmox, that Opnsense acts as a trunk in the VLAN-NET.<br/>
+(If you don't know what a trunk is look it up!)
+
+### Configuration
+To configure Opnsense as a trunk in the VLAN-NET, follow these steps:
+1. Edit VM Configuration: Access the Proxmox shell and navigate to the VM configuration directory.
+    ```
+    nano /etc/pve/qemu-server/100.conf
+    ```
+2. Update net1 Configuration: Locate the configuration line for net1 in the file and append trunks=1-4095 to it. After the modification, the line should resemble:
+    ```
+    net1: virtio=92:39:CF:F0:F9:A8,bridge=vmbr1,firewall=1,queues=8,tag=100,trunks=1-4095
+    ```
+This ensures Opnsense functions as a trunk in the VLAN-NET.

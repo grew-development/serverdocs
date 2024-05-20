@@ -49,6 +49,7 @@ export default defineConfig({
 							label: 'Installing OPNSense',
 							items: [
 								{ label: 'Downloading ISO', link: '/setups/2-installing-opnsense/1-iso-download' },
+								{ label: 'Creating OPNSense VM', link: '/setups/2-installing-opnsense/2-creating-opnsense-vm' },
 							],
 						},
 					],
