@@ -3,11 +3,13 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
+	site: process.env.CI ? "https://grew-development.github.io" : "http://localhost:4321",
+	base: process.env.CI ? "/serverdocs" : undefined,
 	integrations: [
 		starlight({
-			title: 'My Docs',
+			title: 'Hetzner Server Instruction',
 			social: {
-				github: 'https://github.com/withastro/starlight',
+				github: 'https://github.com/grew-development/serverdocs',
 			},
 			sidebar: [
 				{
