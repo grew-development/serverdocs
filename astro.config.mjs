@@ -33,7 +33,6 @@ export default defineConfig({
 						{ label: 'Serverinfos', link: '/getting-started/3-serverinfos/' },
 					],
 				},
-				
 			],
 		}),
 	],

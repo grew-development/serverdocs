@@ -4,6 +4,7 @@ description: Information about my Hetzner Server
 ---
 
 import { Card, CardGrid } from '@astrojs/starlight/components';
+import CustomCard from '../../../components/ServerhardwareCard.astro'
 
 [<img src="https://www.hetzner.com/_resources/themes/hetzner/images/logo/hetzner-logo.svg?m=1713188202" width="150px" hight="auto"></img>](https://hetzner.com)<br/>
 I host my server at [Hetzner.com](https://hetzner.com).<br/>
@@ -11,25 +12,25 @@ You wanna know why. Take a look at my [FAQ](../2-faq).<br/>
 
 ## Serverhardware
 <CardGrid stagger>
-    <Card title="CPU" icon="seti:hex">
+    <CustomCard title="CPU" icon="seti:hex" color='gold'>
         Intel Core i7-6700
-    </Card>
-    <Card title="RAM" icon="seti:hex">
+    </CustomCard>
+    <CustomCard title="RAM" icon="seti:hex" color='gold'>
         2x RAM 16384 MB DDR4
-    </Card>
-    <Card title="Drives" icon="seti:hex">
+    </CustomCard>
+    <CustomCard title="Drives" icon="seti:hex" color='gold'>
         2x SSD SATA 512 GB
-    </Card>
-    <Card title="Location" icon="seti:hex">
+    </CustomCard>
+    <CustomCard title="Location" icon="seti:hex" color='gold'>
         FSN1-DC11
-    </Card>
-    <Card title="Networkcard" icon="seti:hex">
+    </CustomCard>
+    <CustomCard title="Networkcard" icon="seti:hex" color='gold'>
         NIC 1 Gbit - Intel I219-LM
-    </Card>
-    <Card title="Traffic" icon="seti:hex">
+    </CustomCard>
+    <CustomCard title="Traffic" icon="seti:hex" color='gold'>
         unlimited
-    </Card>
-    <Card title="Operating system" icon="seti:hex">
+    </CustomCard>
+    <CustomCard title="Operating system" icon="seti:hex" color='gold'>
     Debian 11: Codename "Bullseye"
-    </Card>
+    </CustomCard>
 </CardGrid>
