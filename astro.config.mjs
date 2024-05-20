@@ -40,6 +40,7 @@ export default defineConfig({
 							items: [
 								{ label: 'Start Rescue Mode', link: '/setups/1-installing-proxmox/1-hetzner-rescue-mode' },
 								{ label: 'Installing Proxmox', link: '/setups/1-installing-proxmox/2-install-proxmox' },
+								{ label: 'Login into Proxmox', link: '/setups/1-installing-proxmox/3-login-into-proxmox' },
 							],
 						},
 					],
