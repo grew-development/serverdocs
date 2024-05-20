@@ -51,17 +51,18 @@ export default defineConfig({
 								{ label: 'Downloading ISO', link: '/setups/2-installing-opnsense/1-iso-download' },
 								{ label: 'Creating OPNSense VM', link: '/setups/2-installing-opnsense/2-creating-opnsense-vm' },
 								{ label: 'Installing OPNSense', link: '/setups/2-installing-opnsense/3-installing-opnsense' },
+								{ label: 'Basic OPNSense Configuration', link: '/setups/2-installing-opnsense/4-configure-opnsense' },
 							],
 						},
+					],
+				},
+				{
+					label: 'Configs',
+					items: [
 						{
-							label: 'Configs',
+							label: 'Proxmox',
 							items: [
-								{
-									label: 'Proxmox',
-									items: [
-										{ label: '/etc/network/interfaces', link: '/setups/1-installing-proxmox/interfaces-file' },
-									],
-								},
+								{ label: 'Default Interface-File', link: '/configs/proxmox/etc-network-interfaces' },
 							],
 						},
 					],
