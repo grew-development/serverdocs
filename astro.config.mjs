@@ -45,6 +45,12 @@ export default defineConfig({
 								{ label: 'Proxmox ReadMe', link: '/setups/1-installing-proxmox/5-proxmox-readme' },
 							],
 						},
+						{
+							label: 'Installing OPNSense',
+							items: [
+								{ label: 'Downloading ISO', link: '/setups/2-installing-opnsense/1-iso-download' },
+							],
+						},
 					],
 				},
 			],
