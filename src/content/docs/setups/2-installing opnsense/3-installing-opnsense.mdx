@@ -48,7 +48,17 @@ If you forget your password, you will have to reset your entire OPNSense
 </Aside>
 
 After that you can select Complete Install to finish the installation.<br/>
-This will reboot the VM and start of the actual drive now and not the ISO anymore.<br/>
-If you want to you can remove the ISO, but you are not required to.
+This will reboot the VM and start of the actual drive now and not the ISO anymore.
+
+## Post-Installing
+After the installation I like to stop the VM and remove the install ISO<br/>
+so that it will not accidential run again at some point or time.
+
+Currently we can't just stop the VM in proxmox (because of the missing qemu-agent).<br/>
+So you will have to wait till opnsense starts to login (as root and with your currently specified password) and<br/>
+shutdown from the console. You can do so by choosing option 5.
+
+After that, you can go to the hardware and remove the installation ISO from the CD/DVD Drive and<br/>
+then restart the VM for the next steps.
 
 You should now have the basic installation running on your server.

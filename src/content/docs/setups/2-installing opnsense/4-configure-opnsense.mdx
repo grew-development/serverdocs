@@ -8,4 +8,53 @@ import { Aside } from "@astrojs/starlight/components";
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Card, CardGrid } from '@astrojs/starlight/components';
 
+Next we need to configure the WAN for OPNSense in order to be able to access the internet and the WebUI of the Opnsense.
 
+For that we will need to go into the Shell of our OPNSense VM.
+
+From there you will need to login with root if you didn’t already.
+
+You will now have multiple options available. We want to start by assigning our interfaces correctly.<br/>
+For that we will select option `1. Assign interfaces`
+
+* Do you want to configure LAGGS now? `No`
+* Do you want to configure VLANs now? `No` (not now)
+* Enter the WAN interface name: `vtnet0`
+* Enter the LAN interface name: (Enter to skip)
+* Enter the Optional interface 1 name: (Enter to skip)
+* WAN -> vtnet0 Do you want to proceed? `Yes`
+
+Next we want to assign the right IP address to the WAN interface.<br/>
+In the etc/network/interfaces config we already configured a redirect to an IP address.<br/>
+We will use this IP address as our OPNSense IP.
+
+For that we will now have to select option `2. Set interface IP address`.<br/>
+I use the following values within the setting:
+
+<Aside>
+This is only if you are using a setup with a singular IPv4.<br/>
+If you are using two you will need to use `10.10.1.1` as your WAN IPv4 and<br/>
+`10.10.1.0` as your WAN IPv4 gateway.<br/>
+Here we will only add the first WAN the second WAN we can later add in the WebUI
+</Aside>
+
+
+* Enter the number of the interface to configure: (Select your WAN interface)
+* Configure IPv4 address WAN interface via DHCP? `No`
+* Enter the new WAN IPv4 address: `10.10.10.1` (as configured in interfaces in proxmox)
+* Enter the new WAN IPv4 subnet bit count (1 to 32): `31`
+* For a WAN, enter the new WAN IPv4 upstream gateway address: `10.10.10.0`
+* Do you want to use the gateway as the IPv4 name server, too? `No`
+* Enter the IPv4 name server: `1.1.1.1` (Cloudflare) or `8.8.8.8` (Google)
+
+<Aside>
+If you want to use IPv6, you will need to configure IPv6 in your etc/network/interfaces config and<br/>
+also configure IPv6 in OPNSense. You can still do so later from the OPNSense WebUI.<br/>
+I did not use IPv6 for my setup.
+</Aside>
+
+* Configure IPv6 address WAN interface via DHCP6? `No`
+* Enter the new WAN IPv6 address: (Enter to skip)
+* Do you want to change the web GUI protocol from HTTPS to HTTP? `No`
+* Do you want to generate a new self-signed web GUI certificate? `Yes`
+* Restore web GUI access defaults? `Yes`
