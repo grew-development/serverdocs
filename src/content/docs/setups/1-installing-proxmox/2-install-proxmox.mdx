@@ -1,0 +1,48 @@
+---
+title: Installing Proxmox
+author: Sven Rönnfranz alias Grewo
+description: Install Proxmox on your Server
+---
+
+import { Aside } from "@astrojs/starlight/components";
+
+<Aside type="caution">
+You need to be in Rescue Mode for the following steps.<br/>
+And you will need access via SSH to the server.
+</Aside>
+
+To install Proxmox on my hetzner server, I used the `installimage` Script provided by hetzner.com<br/>
+
+I used the `Proxmox-Bullseye` version. Because at the time of writing this Debian Bullseye is the most stable version of debian.
+
+* Go into your SSH Console
+* Write `installimage`
+* Choose `Other > Proxmox[...]-Debian-Bookworm`
+
+In the install config I only **changed the hostname to `proxmox.mydomain.com`**.<br/>
+I also changed the disk size, because by default the config does not set the partition sized right.<br/>
+I assigned as much as possible and also a bit of swap.
+
+**Example:**
+```
+HOSTNAME proxmox.grew-development.com
+```
+
+**Exaple:**
+```
+LV  vg0 root    /       ext3    460GiB
+LV  vg0 swap    swap    ext3    12GiB 
+```
+
+* Save (F2) the Config-file
+* Quit (F10) the Config-file
+* Confirm the next two confirmations
+* Wait until the installation is finished.
+
+If you follow this the `installimage` script will automatically install Proxmox with RAID. And will setup all basic configs to get started on its own.
+After installation the server will restart and Proxmox will then be accessible via port 8006 on your IP4-Address.
+
+<Aside type="note">
+For your information, don't be alarmed if the installation takes longer than five minutes.<br/>
+This is very normal, depending on how fast your server is.
+</Aside>
