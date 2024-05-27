@@ -20,8 +20,8 @@ This repository is inspired by and collaborated with [@Redacks](https://github.c
 This is where I write down all my planned tasks and documentation.<br>
 You can track their status here.
 
-- [ ] Proxmox Setup
-- [ ] Opnsense Setup
+- [x] Proxmox Setup
+- [x] Opnsense Setup
 - [ ] Tailscale Setup (in Opnsense)
 - [ ] Docker Setup
 - [ ] Tailscale Setup (in Docker)

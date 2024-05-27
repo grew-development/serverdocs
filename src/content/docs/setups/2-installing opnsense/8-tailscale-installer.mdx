@@ -1,0 +1,46 @@
+---
+title: Tailscale installer (in OPNSense)
+author: Sven Rönnfranz alias Grewo
+description: Installer Wiki for Tailscale installation in opnsense
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+Tailscale is a VPN like software that allows you to create virtual network between your devices.
+It also allows for simple in Browser SSH and Exit Node creation if you want to use your server as a VPN aswell.
+It also has a lot of other usefull features like file sharing and much more.
+
+<Aside type="note">
+This step is optional.<br/>
+However, I recommend this step because it allows secure and private access to your services or servers without opening any ports.
+You can also use it to access your devices from anywhere in the world for debugging purposes.
+</Aside>
+
+## Installing Tailscale
+Tailscale is sadly not directly available as a plugin.<br/>
+But its still rather simple to install. I mainly followed the official Tailscale guide which isn’t 100% correct at the moment.
+
+<LinkCard
+    title="Official Tailscale-Guide"
+    href="https://tailscale.com/kb/1097/install-opnsense"
+/>
+
+First of all, we should download more ports for OPNSense.<br/>
+* Go to your  OPNSense Console
+* Choose `Option 8` for open shell
+* Wirte `opnsense-code ports` (the download may take some time now)
+
+Now we have to go to our tailscale folder to start the installation there
+
+* Open your Tailscale-Folder with `cd /usr/ports/security/tailscale`
+* Write `make isntall` (This will take a few minutes depending on the CPU performance)
+
+Now everything should be installed and we can now start a tailscale demon as well as execute tailscale.
+
+* `service tailscaled enable`
+* `service tailscaled start`
+
+To test whether Tailscale has actually started, we can enter `tailscale version`.<br/>
+If everything has now worked, we can now connect to our Tailscale account.
+
