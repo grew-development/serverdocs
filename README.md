@@ -22,7 +22,7 @@ You can track their status here.
 
 - [x] Proxmox Setup
 - [x] Opnsense Setup
-- [ ] Tailscale Setup (in Opnsense)
+- [x] Tailscale Setup (in Opnsense)
 - [ ] Docker Setup
 - [ ] Tailscale Setup (in Docker)
 - [ ] Proxy Setup

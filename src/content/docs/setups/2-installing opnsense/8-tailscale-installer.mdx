@@ -44,3 +44,22 @@ Now everything should be installed and we can now start a tailscale demon as wel
 To test whether Tailscale has actually started, we can enter `tailscale version`.<br/>
 If everything has now worked, we can now connect to our Tailscale account.
 
+## Connect Tailscale
+Now select how you want to connect Tailscale to your OPNsense.
+There are four different options.
+
+1. `tailscale up` > Execute this command to establish the simple connection.
+2. `tailscale up --ssh` > This will allow you to establish an SSH connection via tailscale
+3. `tailscale up --advertise-exit-node` > Run this command to use OPNsense as VPN or Exit Node
+4. `tailscale up --ssh --advertise-exit-node` > Establish tailscale with SSH connection and exit node (my choice)
+
+After you have entered your name, a link like "https://login.tailscale.com/a/RANDOMNUMBER" will appear.
+
+Enter this into the browser to log in to Tailscale.
+Your OPNsense will now automatically be added to your tailscale, as soon as you have confirmed everything you will automatically be taken to your machines
+
+## Activating Exit Node
+Even tho because of firewall rules Tailscale will not have internet access on the exit node for now you also need to make sure to allow the device to be used as an access node in the Tailscale `Admin Console`.
+There you can click the option buttons next to your device and go to `Edit route settings`.
+There you need to enable `Use as exit node`. This should be everything you need to do.
+Now it should be an available option as an exit node on for exampel your desktop or mobile device in the Tailscale app.
