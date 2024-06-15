@@ -1,0 +1,29 @@
+---
+title: Setup Network for Proxy
+author: Sven Rönnfranz alias Grewo
+description: Setup Networksettings for my Proxy-Container
+---
+
+import { Aside } from "@astrojs/starlight/components";
+
+## Configuring Trunks
+You will have to add a new trunk each time you want to connect a new VLAN to the Docker CT.
+For that its simmelar to the OPNSense setup.
+run the Commands in the proxmox-shell. You can edit the config with `vim` or `nano`.
+```
+nano /etc/pve/lxc/101.conf
+```
+
+We will need to edit the line starting with `net0`: and add all your VLANS as trunks `trunks=102;103;...`
+It should look like this after that
+```
+net0: name=vlan0,bridge=vmbr1,firewall=1,hwaddr=BC:24:11:1C:45:19,type=veth,trunks=102;103;104;110;111
+```
+
+I added 102-104 and 110, 111 for now, because I will need them for sure.<br/>
+Reboot the dockersoft-container.
+
+<Aside type="caution">
+Make sure to add new VLANs to trunks when needing a new VLAN
+</Aside>
+

@@ -73,6 +73,7 @@ export default defineConfig({
 							items: [
 								{ label: 'Installation preparation', link: '/setups/4-installing-nginxproxymanager/1-installation-preparation' },
 								{ label: 'Create DockerCompose-File', link: '/setups/4-installing-nginxproxymanager/2-create-composefile' },
+								{ label: 'Setup Network', link: '/setups/4-installing-nginxproxymanager/3-setup-network' },
 							],
 						},
 					],
