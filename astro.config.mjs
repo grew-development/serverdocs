@@ -72,6 +72,7 @@ export default defineConfig({
 							label: 'Installing NGINX',
 							items: [
 								{ label: 'Installation preparation', link: '/setups/4-installing-nginxproxymanager/1-installation-preparation' },
+								{ label: 'Create DockerCompose-File', link: '/setups/4-installing-nginxproxymanager/2-create-composefile' },
 							],
 						},
 					],
@@ -83,6 +84,12 @@ export default defineConfig({
 							label: 'Proxmox',
 							items: [
 								{ label: 'Default Interface-File', link: '/configs/proxmox/etc-network-interfaces' },
+							],
+						},
+						{
+							label: 'Docker Compose Files',
+							items: [
+								{ label: 'NGINX File', link: '/configs/docker-composefiles/compose-nginx' },
 							],
 						},
 					],
