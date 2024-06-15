@@ -68,6 +68,12 @@ export default defineConfig({
 								{ label: 'Tailscale Installer', link: '/setups/3-installing-docker/5-tailscale-installer' },
 							],
 						},
+						{
+							label: 'Installing NGINX',
+							items: [
+								{ label: 'Installation preparation', link: '/setups/4-installing-nginxproxymanager/1-installation-preparation' },
+							],
+						},
 					],
 				},
 				{
