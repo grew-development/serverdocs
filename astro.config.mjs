@@ -58,6 +58,16 @@ export default defineConfig({
 								{ label: 'Tailscale Installer', link: '/setups/2-installing-opnsense/8-tailscale-installer' },
 							],
 						},
+						{
+							label: 'Installing Docker',
+							items: [
+								{ label: 'Download CT-Template', link: '/setups/3-installing-docker/1-cttemplate-download' },
+								{ label: 'Creating Docker CT', link: '/setups/3-installing-docker/2-creating-docker-ct' },
+								{ label: 'Setup Network for Docker', link: '/setups/3-installing-docker/3-create-docker-vlan' },
+								{ label: 'Install Docker', link: '/setups/3-installing-docker/4-install-docker' },
+								{ label: 'Tailscale Installer', link: '/setups/3-installing-docker/5-tailscale-installer' },
+							],
+						},
 					],
 				},
 				{

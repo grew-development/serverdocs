@@ -1,0 +1,71 @@
+---
+title: Creating Docker CT
+author: Sven Rönnfranz alias Grewo
+description: Creating your Container for the Docker-Software
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Start by creating a new CT in proxmox.
+I used VM ID 101 to display it at the top because its the first entry point for every request to the server.
+Later I also assign VLAN101 to the opnsense.
+
+Click on the `Create CT` button above and set the LXC Container with the following values.
+I left all values that were not specified as they were or were not specified at the time of creation.
+
+<Aside type="tip">
+    Activate Advanced Mode at the bottom of the window
+</Aside>
+
+### CT Settingvalues
+After creating the CT we will add the vlan network aswell.<br/>
+Now confirm the whole thing in the `Confirm area` and click on the `finish` button.
+Please be patient for a moment until the CT is finished and "TASK OK" is displayed in the output console.
+
+<Tabs>
+    <TabItem label="General">
+        Node                -   proxmox<br/>
+        CT ID               -   101<br/>
+        Hostname            -   Dockersoft<br/>
+        Password            -   Set personal password<br/>
+        Confirm Password    -   Confirm personal password<br/>
+    </TabItem>
+    <TabItem label="Template">
+        Storage             -   local<br/>
+        Template            -   Choose your iso here<br/>
+    </TabItem>
+    <TabItem label="Disk">
+        Disk size   -   350 GiB (depends on the amount of docker container, you can go smaller and resize it later)
+    </TabItem>
+    <TabItem label="CPU">
+        Cores           -   3-open (I assigned most of my cores to the CT because I plan to run most of the services as docker containers)
+    </TabItem>
+    <TabItem label="Memory">
+        Memory  -   40960 MiB<br/>
+        Swap    -   6144 MiB<br/>
+        <Aside type="note">
+            You must enter this value in MiB<br/>
+            i.e. 6144 MiB for 6GB or 40960 MiB for 40GB
+        </Aside>
+    </TabItem>
+    <TabItem label="Network">
+        Name            -   eth0<br/>
+        Bridge          -   vmbr1 (VLAN-Network)<br/>
+        VLAN Tag        -   101 (The same as my container ID)<br/>
+        IPv4            -   Static<br/>
+        IPv4/CIDR       -   10.1.1.2/24<br/>
+        Gateway (IPv4)  -   10.1.1.1
+    </TabItem>
+    <TabItem label="DNS">
+        DNS domain  -   
+        DNS servers -   1.1.1.1 (Cloudflare DNS-Server) or 8.8.8.8 (Google DNS-Server)
+    </TabItem>
+</Tabs>
+
+## Post-Create
+Now we will activate the `Start at Boot` Option.<br/>
+To do this, we proceed as follows:
+* Open your container (CT ID 101)
+* Go to `Options > Start at Boot`
+* Change to True

@@ -1,0 +1,59 @@
+---
+title: Tailscale installer (in OPNSense)
+author: Sven Rönnfranz alias Grewo
+description: Installer Wiki for Tailscale installation in opnsense
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<Aside type="note">
+We now know why I installed Tailsclae. But on the docker container I use Tailscale to get FTP access.
+</Aside>
+
+## Installing Tailscale
+* Open `https://tailscale.com/download/linux`
+* Copy the command in your clipboard
+* Go to your Docker CT Console
+* Run the command from your clipboard
+
+
+
+## Connect Tailscale
+When the installation is complete, you only need to execute the following command.
+Now select how you want to connect Tailscale to your Docker-CT.
+There are four different options.
+
+1. `tailscale up` > Execute this command to establish the simple connection.
+2. `tailscale up --ssh` > This will allow you to establish an SSH connection via tailscale (my choice)
+3. `tailscale up --advertise-exit-node` > Run this command to use OPNsense as VPN or Exit Node
+4. `tailscale up --ssh --advertise-exit-node` > Establish tailscale with SSH connection and exit node
+
+After you have entered your name, a link like "https://login.tailscale.com/a/RANDOMNUMBER" will appear.
+
+Enter this into the browser to log in to Tailscale.
+Your OPNsense will now automatically be added to your tailscale, as soon as you have confirmed everything you will automatically be taken to your machines
+
+Congratulations, you can now connect to your Docker CT with FTP via your Tailscale address
+
+### Connection error 
+If an error occurs that tailscale cannot be started, you must first perform the following steps.
+However, these are also officially linked by tailscale.
+
+<LinkCard
+    title="Tailscale in LXC containers"
+    href="https://tailscale.com/kb/1130/lxc-unprivileged"
+/>
+
+Nevertheless, I will explain the steps to you now
+* Go to your proxmox Console
+* run `nano /etc/pve/lxc/101.conf` (the number changes depending on which CT-Id you use)
+* add at the end:
+```
+lxc.cgroup2.devices.allow: c 10:200 rwm
+lxc.mount.entry: /dev/net/tun dev/net/tun none bind,create=file
+``` 
+* Safe (STRG+o) and close (STRG+x) the file
+* Reboot the CT
+
+Now you can repeat the [Connect Tailscale](#connect-tailscale) steps!
