@@ -23,8 +23,8 @@ You can track their status here.
 - [x] Proxmox Setup
 - [x] Opnsense Setup
 - [x] Tailscale Setup (in Opnsense)
-- [ ] Docker Setup
-- [ ] Tailscale Setup (in Docker)
-- [ ] Proxy Setup
+- [x] Docker Setup
+- [x] Tailscale Setup (in Docker)
+- [x] Proxy Setup
 - [ ] Dockge Setup
 - [ ] ...
