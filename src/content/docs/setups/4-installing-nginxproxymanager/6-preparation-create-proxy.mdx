@@ -1,0 +1,37 @@
+---
+title: Preparation - Create proxy host
+author: Sven Rönnfranz alias Grewo
+description: Preparation for the creation of a proxy
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+
+<Aside type="note">
+Preparation for the creation of a proxy.<br/>
+In any case, it is safer and advisable to do this via the tailscale IPs to ensure your own security.
+
+I use my tailscale IPs for the next steps, but you can still use the addresses from your public IP.<br/>
+I.e. it is best to read my instructions correctly, but I try to put the alternative IP's in brackets.
+</Aside>
+
+## Create API token (Cloudflare)
+To create an API token there is an official guide from Cloudflare.<br/>
+Nevertheless, I will describe how I proceeded.
+<LinkCard
+    title="Official API-Guide"
+    href="https://developers.cloudflare.com/fundamentals/api/get-started/create-token/"
+/>
+
+* Open the [Cloudflare Dashboard](https://dash.cloudflare.com/profile/api-tokens/)
+* Go to `My Profile > API Tokens`
+* Select `Create Token`
+* Select the Template `Edit zone DNS`
+* Edit the token name to describe why or how the token is used.<br/>I name it "Proxy SSL Token"
+
+* Modify the Permissions to `Zone | DNS | Edit`
+* Modify the Zone Resources to `Include' | All zones`
+* Click `Continue to summary`
+* Click `Create Token` to generate the token’s secret.
+* Copy the secret-token to a secure place
