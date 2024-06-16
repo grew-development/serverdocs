@@ -3,7 +3,7 @@ import starlight from '@astrojs/starlight';
 
 // https://astro.build/config
 export default defineConfig({
-	site: process.env.CI ? "https://docu.grew-development.de" : "http://localhost:4321",
+	site: process.env.CI ? "https://docs.grew-development.de" : "http://localhost:4321",
 	base: process.env.CI ? "/serverdocs" : undefined,
 	integrations: [
 		starlight({
