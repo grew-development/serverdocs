@@ -1,0 +1,45 @@
+---
+title: Create Access Lists
+author: Sven Rönnfranz alias Grewo
+description: Create a Access-List, to make sure that you have to use tailscale.
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Connecting to NGINX-WebUI
+Open and Login to `proxy.yourdomain.com`
+
+## Create Access Lists
+* Go to `Access Lists`
+* Click turquoise `Add Access List`-Button
+* Now enter the following values
+* Click `Safe`-button
+
+### Proxysettings
+<Tabs>
+    <TabItem label="Details-Tab">
+        Names               -   Tailscale<br/>
+        Satisfy Any         -   false<br/>
+        Pass Auth to host   -   false<br/>
+    </TabItem>
+    <TabItem label="Authorization-Tab">
+        Change nothing, unless you know why you're doing it right now
+    </TabItem>
+    <TabItem label="Access">
+        IP Address Whitelist/Blacklist<br/>
+        * allow > 100.64.0.0/10
+        * deny > all
+    </TabItem>
+</Tabs>
+<br/>
+
+## Add Access Lists
+* Go to `Hosts > Proxy Hosts`
+* Edit all sources that should only be accessible via tailscale.
+* Change `Access List` to `Tailscale`
+* Click `Safe`-button
+<br/>
+
+Congratulations, now the changed IPs can only be visited with a tailscale client.
+So make sure that each of your devices that should access the URLs have your Tailscale account.
