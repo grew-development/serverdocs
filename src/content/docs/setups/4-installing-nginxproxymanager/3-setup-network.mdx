@@ -5,6 +5,7 @@ description: Setup Networksettings for my Proxy-Container
 ---
 
 import { Aside } from "@astrojs/starlight/components";
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## Configuring Trunks
 You will have to add a new trunk each time you want to connect a new VLAN to the Docker CT.
@@ -27,3 +28,85 @@ Reboot the dockersoft-container.
 Make sure to add new VLANs to trunks when needing a new VLAN
 </Aside>
 
+## Create VLAN in OPNsense
+### Connecting to OPNsense-WebUI
+You can connect to OPNSense via a SSH-Tunnel.
+
+* Open Windows Terminal
+* Use the command: `ssh root@<yourIP4> -L 443:<WAN_IP4>:443`
+
+This will open up a tunnel. After that you should be able to connect via `https://localhost`.
+To setup everything important I recommend running the setup wizard. It will configure some important things needed for further configuration
+
+<Aside>
+If you cannot reach the OPNSense make sure that the firewall is disabled in OPNSense.
+
+You can do so from Proxmox in the OPNSense console by selecting option 8.<br/>
+In the OPNSense console you can then type `pfctl -d` to disable the firewall.<br/>
+It will reenable after each apply you do inside of the OPNSense WebUI or by running `pfctl -e`.
+All Rules will be disabled when the firewall is disabled. If every you can’t reach OPNSense on the
+tunnel or you need to trubbleshoot make sure to disable the firewall again.<br/>
+
+THIS WILL HAPPEN A LOT DURING SETUP!
+</Aside>
+
+### Create Interface
+* Go to `Interfaces > Other Types > VLAN`
+* Add VLAN by clicking the plus-button
+* Enter the following values
+* Hit 'safe' and then 'apply'
+
+#### Interfacesetting
+<Tabs>
+    <TabItem label="Edit VLAN">
+        Device          -   vlan0.102 ( vlan0.\<VLAN_ID> )<br/>
+        Parent          -   vtnet1<br/>
+        VLAN tag        -   102<br/>
+        VLAN priority   -   Default<br/>
+        Description     -   102_proxy ( \<VLAN_ID>_\<NAME_FOR_THE_VLAN> )<br/>
+    </TabItem>
+</Tabs>
+
+### Adding the new interface
+* Go to `Interfaces > Assignments`
+* Select your new VLAN in "Assign a new interface" you just create
+* Provide a description (Use the same description as above - Example: 102_proxy)
+* Click the `Add`-button
+
+### Enable of the new interface
+* Go to `Interfaces > [Your Interface]` (example proxy: 102_proxy)
+* Enable the Interface
+* Select under `Generic configuration` the "IPv4 Configuration Type" from "none" to "Static IPv4"
+* Enter the IP address for the Proxmox Gateway under “Static IPv4 configuration” (example proxy: 10.1.2.1)
+* Choose your Subnet to 24
+* Hit Safe and Apply changes
+
+### Update RFC1918-Rules
+* Go to `Firewall > Aliases`
+* Edit the `RFC1918-rule` by clicking the pen
+* Add content `__opt2_network` (In future all those beginning with __)
+* Hit Safe and Apply
+
+### Add Rule RFC1918 to Interface
+We will use RFC1918 to configure firewall rules for internet access.
+If you want to give internet access to a vlan but still restrict access to all other internal IPs
+you can do that with the help of a firewall rule that accepts all connections except if they target RFC1918.
+
+* Go to "Firewall > Rules"
+* Select the VLAN you want to grant internet access
+* Create a new rule if it doesnt already exist by hitting the plus.
+
+We want to allow everything except if the destination is RFC1918.
+
+* Enable Destination / Invert.
+* Select RFC1918 as a destination
+* Select the Category (optional)
+* Safe and Apply Changes
+
+### Add Alias for proxy
+* Go to `Firewall > Aliases`
+* Hit the Plus-Symbol
+* Enter the name `proxy`
+* Choose type as `host(s)`
+* Selected content `10.1.2.2`
+* Hit Safe and Apply
