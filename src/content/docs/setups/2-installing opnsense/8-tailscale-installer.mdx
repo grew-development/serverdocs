@@ -63,3 +63,36 @@ Even tho because of firewall rules Tailscale will not have internet access on th
 There you can click the option buttons next to your device and go to `Edit route settings`.
 There you need to enable `Use as exit node`. This should be everything you need to do.
 Now it should be an available option as an exit node on for exampel your desktop or mobile device in the Tailscale app.
+
+## Adding the tailscale-interface
+* Go to `Interfaces > Assignments`
+* Select your tailscale-interface in "Assign a new interface"
+* Provide a description (Use the same description as above - Example: TAILSCALE)
+* Click the `Add`-button
+
+## Enable the tailscale-interface
+* Go to `Interfaces > [Your Interface]` (example docker: TAILSCALE)
+* Enable the Interface
+* Hit Safe and Apply changes
+
+## Update RFC1918-Rules
+* Go to `Firewall > Aliases`
+* Edit the `RFC1918-rule` by clicking the pen
+* Add content `__opt1_network` (In future all those beginning with __, but the number can be different)
+* Hit Safe and Apply
+
+## Add Rule RFC1918 to Interface
+We will use RFC1918 to configure firewall rules for internet access.
+If you want to give internet access to the tailscale-interface but still restrict access to all other internal IPs
+you can do that with the help of a firewall rule that accepts all connections except if they target RFC1918.
+
+* Go to "Firewall > Rules"
+* Select the tailscale-interface you want to grant internet access
+* Create a new rule if it doesnt already exist by hitting the plus.
+
+We want to allow everything except if the destination is RFC1918.
+
+* Enable Destination / Invert.
+* Select RFC1918 as a destination
+* Select the Category (optional)
+* Safe and Apply Changes
