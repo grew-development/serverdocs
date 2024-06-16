@@ -6,6 +6,7 @@ description: Installer Wiki for Tailscale installation in opnsense
 
 import { Aside } from "@astrojs/starlight/components";
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 Tailscale is a VPN like software that allows you to create virtual network between your devices.
 It also allows for simple in Browser SSH and Exit Node creation if you want to use your server as a VPN aswell.
@@ -96,3 +97,32 @@ We want to allow everything except if the destination is RFC1918.
 * Select RFC1918 as a destination
 * Select the Category (optional)
 * Safe and Apply Changes
+
+## Create NAT-Rule
+We now also forward the default port from my Tailscale here.
+* Go to `Firewall > NAT > Port Forward`
+* Add Rule by clicking the plus-button
+* Enter the following values
+* Hit 'safe' and then 'apply'
+
+### NATrule-Settings
+<Tabs>
+    <TabItem label="Port 80 / http">
+        Interface               -   TAILSCALE<br/>
+        Destination / Invert    -   false<br/>
+        Destination             -   TAILSCALE_ADDRESS<br/>
+        Destination port from   -   http (80)<br/>
+        Destination port to     -   http (80)<br/>
+        Redirect Target IP      -   Proxy-Alias (IP: 10.1.2.2)<br/>
+        Redirect Target Port    -   http (80)<br/>
+    </TabItem>
+    <TabItem label="Port 443 / https">
+        Interface               -   TAILSCALE<br/>
+        Destination / Invert    -   false<br/>
+        Destination             -   TAILSCALE_ADDRESS<br/>
+        Destination port from   -   https (443)<br/>
+        Destination port to     -   https (443)<br/>
+        Redirect Target IP      -   Proxy-Alias (IP: 10.1.2.2)<br/>
+        Redirect Target Port    -   https (443)<br/>
+    </TabItem>
+</Tabs>

@@ -18,7 +18,7 @@ We would like to create a temporary firewall rule to access the WebUI via port 8
 To do this, first open opnsense via your SSH-Tunnel.
 
 * Open Windows Terminal
-* Use the command: `ssh root@<yourIP4> -L 443:<WAN_IP4>:443`
+* Use the command: `ssh root@<yourIP4> -L 443:<WAN_IP4>:9443`
 
 This will open up a tunnel. After that you should be able to connect via `https://localhost`.
 To setup everything important I recommend running the setup wizard. It will configure some important things needed for further configuration
@@ -39,7 +39,7 @@ THIS WILL HAPPEN A LOT DURING SETUP!
 * Go to `Firewall > NAT > Port Forward`
 * Add Rule by clicking the plus-button
 * Enter the following values
-* Hit ‘safe’ and then ‘apply’
+* Hit 'safe' and then 'apply'
 
 #### NATrule-Settings
 <Tabs>

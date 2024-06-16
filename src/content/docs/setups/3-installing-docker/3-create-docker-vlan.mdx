@@ -16,7 +16,7 @@ That's why I first create my VLAN in OPNsense and then check whether the server 
 You can connect to OPNSense via a SSH-Tunnel.
 
 * Open Windows Terminal
-* Use the command: `ssh root@<yourIP4> -L 443:<WAN_IP4>:443`
+* Use the command: `ssh root@<yourIP4> -L 443:<WAN_IP4>:9443`
 
 This will open up a tunnel. After that you should be able to connect via `https://localhost`.
 To setup everything important I recommend running the setup wizard. It will configure some important things needed for further configuration

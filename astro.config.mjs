@@ -55,7 +55,8 @@ export default defineConfig({
 								{ label: 'OPNSense Setup', link: '/setups/2-installing-opnsense/5-opnsense-setup' },
 								{ label: 'OPNSense Update & Plugins', link: '/setups/2-installing-opnsense/6-update-plugin' },
 								{ label: 'RFC1918 Alias', link: '/setups/2-installing-opnsense/7-rfc1918' },
-								{ label: 'Tailscale Installer', link: '/setups/2-installing-opnsense/8-tailscale-installer' },
+								{ label: 'Change Default Port', link: '/setups/2-installing-opnsense/8-change-default-port' },
+								{ label: 'Tailscale Installer', link: '/setups/2-installing-opnsense/9-tailscale-installer' },
 							],
 						},
 						{
