@@ -8,6 +8,7 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Hetzner Server Instruction',
+			favicon: 'favicon.ico',
 			/*
 			defaultLocale: "root",
 			locales: {
