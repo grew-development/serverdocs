@@ -84,6 +84,12 @@ export default defineConfig({
 								{ label: 'Create Access-List', link: '/setups/4-installing-nginxproxymanager/8-create-accesslists' },
 							],
 						},
+						{
+							label: 'Installing Dockge',
+							items: [
+								{ label: 'Create DockerCompose-File', link: '/setups/5-installing-dockge/1-create-composefile' },
+							],
+						},
 					],
 				},
 				{
@@ -106,6 +112,7 @@ export default defineConfig({
 							label: 'Docker Compose Files',
 							items: [
 								{ label: 'NGINX File', link: '/configs/docker-composefiles/compose-nginx' },
+								{ label: 'Dockge File', link: '/configs/docker-composefiles/compose-dockge' },
 							],
 						},
 					],

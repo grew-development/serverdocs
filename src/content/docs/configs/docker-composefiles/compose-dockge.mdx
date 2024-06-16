@@ -1,0 +1,45 @@
+---
+title: DockerCompose-File - Dockge
+author: Sven Rönnfranz alias Grewo
+description: Create the DockerCompose-File
+---
+This is the dockercompose-file for Dockge-Container
+
+```
+version: "3.8"
+services:
+  dockge:
+    image: louislam/dockge:1
+    restart: unless-stopped
+    ports:
+      - 5001:5001
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data:/app/data
+      - /opt/stacks:/opt/stacks
+    environment:
+      # Tell Dockge where to find the stacks
+      - DOCKGE_STACKS_DIR=/opt/stacks
+    labels:
+      - homepage.group=Docker
+      - homepage.name=Dockge
+      - homepage.icon=dockge.png
+      - homepage.href=${DOCKGE_EXTERNAL_IP}
+    networks:
+      vlan103_net:
+        ipv4_address: 10.1.3.2
+networks:
+  vlan103_net:
+    driver: ipvlan
+    driver_opts:
+      mode: l2
+      subnet: 10.1.3.0/24
+      parent: eth0.103
+    ipam:
+      config:
+        - subnet: 10.1.3.0/24
+          gateway: 10.1.3.1
+x-dockge:
+  urls:
+    - ${DOCKGE_EXTERNAL_IP}
+```
