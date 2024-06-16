@@ -1,0 +1,137 @@
+---
+title: Create subdomain to NGINX
+author: Sven Rönnfranz alias Grewo
+description: Creationsteps of a proxy and subdomain connection
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+First, we want to build a proxy host for our NGINX manager so that we can access our manager via the subdomain `proxy.yourdomain.com`.
+
+We have already made some settings in advance, including forwarding ports 443 and port 80 to our proxy.
+
+And now we have to do everything else for the creation.
+So let's get started
+
+## Create DNS Record (Domain-Provider)
+First, we create a DNS record for our first subdomain with our website provider.<br/>
+Since I run my domain via Cloudflare, I will also create my first DNS record there.
+
+* Open your DNS-Record-Area
+* Create the record with the following values
+* Save and Apply
+
+<Tabs>
+    <TabItem label="Type">
+        A
+    </TabItem>
+    <TabItem label="Name">
+        proxy<br/>
+        (your subdomain for the proxy manager like proxy.yourdomain.com)
+    </TabItem>
+    <TabItem label="IPv4-Address">
+        TAILSCALE-ADRESS from OPNsense or your public IP
+    </TabItem>
+    <TabItem label="Proxy Status">
+        False   -   If you use Tailscaleadress<br/>
+        True    -   If you use Public IP
+    </TabItem>
+    <TabItem label="TTL">
+        Auto or 120 Seconds
+    </TabItem>
+</Tabs>
+
+## Open and Login to the webinterface
+<Aside type="note">
+If you cannot reach the OPNSense make sure that the firewall is enable in OPNSense.
+
+You can do so from Proxmox in the OPNSense console by selecting option 8.<br/>
+In the OPNSense console you can then type `pfctl -e` to enable the firewall.<br/>
+</Aside>
+
+### via tailscale ip (my choice)
+Now you can access the web interface of your proxy manager with your browser.
+<Aside type="caution">
+To continue with this step, make sure you have installed and turned on your Tailsclae on the OPNsense.
+If not go to [OPNsende > Tailscale Installer](../2-installing-opnsense/8-tailscale-installer).
+</Aside>
+```
+http://opnsense_tailscale_ip:81
+```
+
+### via public ip
+Now you can access the web interface of your proxy manager with your browser.
+```
+http://yourip:81
+```
+
+## Create Proxy host
+* Go to `Hosts > Proxy Hosts`
+* Click green `Add Proxy Host`-Button
+* Now enter the following values
+* Click `Safe`-button
+
+### Proxysettings
+<Tabs>
+    <TabItem label="Details-Tab">
+        Domain Names            -   proxy.yourdomain.com<br/>
+        Scheme                  -   http<br/>
+        Forward Hostname / IP   -   127.0.0.1 or localhost<br/>
+        Forward port            -   81<br/>
+        Cache Assets            -   false<br/>
+        Block Common Exploits   -   false<br/>
+        Websockets Support      -   true<br/>
+        Access List             -   "Publicly Accessible"
+    </TabItem>
+    <TabItem label="Custom locations-Tab">
+        Change nothing
+    </TabItem>
+    <TabItem label="SSL-Tab">
+        SSL Certificate     -   "Request a new SSL Certificate"<br/>
+        Force SSL           -   true<br/>
+        HTTP/2 Support      -   true<br/>
+        HSTS Enabled        -   false<br/>
+        HSTS Subdomains     -   false<br/>
+        Use a DNS Challenge -   true (only if you use tailscale)<br/>
+        * DNS Provider > Cloudflare
+        * Credentials File Content > Change the token to your token
+        * Propagation Seconds > empty
+
+        Email Address       -   Your E-Mailadress<br/>
+        Terms of Service    -   true<br/>
+    </TabItem>
+    <TabItem label="Advanced-Tab">
+        Change nothing
+    </TabItem>
+</Tabs>
+
+If the host you have just created has the `status "Online"`, everything has worked and you can reach your proxy manager at `proxy.yourdomain.com`.
+Now we should delete the temporarily created NAT rule from port 81.
+
+## Connecting to OPNsense-WebUI
+We would like to create a temporary firewall rule to access the WebUI via port 81.
+To do this, first open opnsense via your SSH-Tunnel.
+
+* Open Windows Terminal
+* Use the command: `ssh root@<yourIP4> -L 443:<WAN_IP4>:9443`
+
+This will open up a tunnel. After that you should be able to connect via `https://localhost`.
+To setup everything important I recommend running the setup wizard. It will configure some important things needed for further configuration
+
+<Aside>
+If you cannot reach the OPNSense make sure that the firewall is disabled in OPNSense.
+
+You can do so from Proxmox in the OPNSense console by selecting option 8.<br/>
+In the OPNSense console you can then type `pfctl -d` to disable the firewall.<br/>
+It will reenable after each apply you do inside of the OPNSense WebUI or by running `pfctl -e`.
+All Rules will be disabled when the firewall is disabled. If every you can’t reach OPNSense on the
+tunnel or you need to trubbleshoot make sure to disable the firewall again.<br/>
+
+THIS WILL HAPPEN A LOT DURING SETUP!
+</Aside>
+
+### Delete NAT-Rule with Port 81
+* Go to `Firewall > NAT > Port Forward`
+* Delete the Rule by clicking the Trash-button
+* Hit 'Yes' and then 'apply'

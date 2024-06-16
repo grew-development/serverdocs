@@ -78,6 +78,7 @@ export default defineConfig({
 								{ label: 'Start Proxymanager', link: '/setups/4-installing-nginxproxymanager/4-start-proxymanger' },
 								{ label: 'Connect to WEB-Interface', link: '/setups/4-installing-nginxproxymanager/5-connect-to-interface' },
 								{ label: 'Preparation - Create proxy host', link: '/setups/4-installing-nginxproxymanager/6-preparation-create-proxy' },
+								{ label: 'Create subdomain to NGINX', link: '/setups/4-installing-nginxproxymanager/7-create-subdomain-nginx' },
 							],
 						},
 					],
