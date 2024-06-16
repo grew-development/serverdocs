@@ -84,6 +84,13 @@ export default defineConfig({
 					],
 				},
 				{
+					label: 'Subdomains',
+					items: [
+						{ label: 'opnseense.yourdomain.com', link: '/subdomains/subdomain-opnsense' },
+						{ label: 'proxmox.yourdomain.com', link: '/subdomains/subdomain-proxmox' },
+					],
+				},
+				{
 					label: 'Configs',
 					items: [
 						{
