@@ -1,0 +1,99 @@
+---
+title: Connect to the WEB-Interface
+author: Sven Rönnfranz alias Grewo
+description: Manuel to connecting to the web-interface with temporary firewall-rule.
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+<Aside type="danger">
+To access the interface you would have to open the 'public port 81'.<br/>
+However, you can bypass this if you have activated and set up tailscale in your OPNsense beforehand.
+</Aside>
+
+## Create temporary firewall rule
+### Connecting to OPNsense-WebUI
+We would like to create a temporary firewall rule to access the WebUI via port 81.
+To do this, first open opnsense via your SSH-Tunnel.
+
+* Open Windows Terminal
+* Use the command: `ssh root@<yourIP4> -L 443:<WAN_IP4>:443`
+
+This will open up a tunnel. After that you should be able to connect via `https://localhost`.
+To setup everything important I recommend running the setup wizard. It will configure some important things needed for further configuration
+
+<Aside>
+If you cannot reach the OPNSense make sure that the firewall is disabled in OPNSense.
+
+You can do so from Proxmox in the OPNSense console by selecting option 8.<br/>
+In the OPNSense console you can then type `pfctl -d` to disable the firewall.<br/>
+It will reenable after each apply you do inside of the OPNSense WebUI or by running `pfctl -e`.
+All Rules will be disabled when the firewall is disabled. If every you can’t reach OPNSense on the
+tunnel or you need to trubbleshoot make sure to disable the firewall again.<br/>
+
+THIS WILL HAPPEN A LOT DURING SETUP!
+</Aside>
+
+### Create NAT-Rule
+* Go to `Firewall > NAT > Port Forward`
+* Add Rule by clicking the plus-button
+* Enter the following values
+* Hit ‘safe’ and then ‘apply’
+
+#### NATrule-Settings
+<Tabs>
+    <TabItem label="tailscale port">
+        Interface               -   TAILSCALE<br/>
+        Destination / Invert    -   false<br/>
+        Destination             -   TAILSCALE_ADDRESS<br/>
+        Destination port from   -   (other) 81<br/>
+        Destination port to     -   (other) 81<br/>
+        Redirect Target IP      -   Proxy-Alias (IP: 10.1.2.2)<br/>
+        Redirect Target Port    -   (other) 81<br/>
+    </TabItem>
+    <TabItem label="public port">
+        Interface               -   WAN<br/>
+        Destination / Invert    -   false<br/>
+        Destination             -   WAN_ADDRESS<br/>
+        Destination port from   -   (other) 81<br/>
+        Destination port to     -   (other) 81<br/>
+        Redirect Target IP      -   Proxy-Alias (IP: 10.1.2.2)<br/>
+        Redirect Target Port    -   (other) 81<br/>
+    </TabItem>
+</Tabs>
+
+## Open the webinterface
+<Aside type="note">
+If you cannot reach the OPNSense make sure that the firewall is enable in OPNSense.
+
+You can do so from Proxmox in the OPNSense console by selecting option 8.<br/>
+In the OPNSense console you can then type `pfctl -e` to enable the firewall.<br/>
+</Aside>
+
+### via tailscale ip (my choice)
+Now you can access the web interface of your proxy manager with your browser.
+<Aside type="caution">
+To continue with this step, make sure you have installed and turned on your Tailsclae on the OPNsense.
+If not go to [OPNsende > Tailscale Installer](../2-installing-opnsense/8-tailscale-installer).
+</Aside>
+```
+http://opnsense_tailscale_ip:81
+```
+
+### via public ip
+Now you can access the web interface of your proxy manager with your browser.
+```
+http://yourip:81
+```
+
+## Login into webinterface
+Please use the following data for the first login.<br/>
+You will then be asked to change your userinformation and the password, but I recommend filling this out.
+
+Save and apply everything
+
+```
+E-Mailadress: admin@example.com
+Password: changeme
+```
