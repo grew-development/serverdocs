@@ -1,0 +1,96 @@
+---
+title: Setup Network for Dockge
+author: Sven Rönnfranz alias Grewo
+description: Setup Networksettings for my Dockge-Container
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Configuring Trunks
+You will have to add a new trunk each time you want to connect a new VLAN to the Docker CT.
+For that its simmelar to the OPNSense setup.
+run the Commands in the proxmox-shell. You can edit the config with `vim` or `nano`.
+```
+nano /etc/pve/lxc/101.conf
+```
+
+We will need to edit the line starting with `net0`: and add all your VLANS as trunks `trunks=102;103;...`
+It should look like this after that
+```
+net0: name=vlan0,bridge=vmbr1,firewall=1,hwaddr=BC:24:11:1C:45:19,type=veth,trunks=102;103;104;110;111
+```
+
+I added 102-104 and 110, 111 for now, because I will need them for sure.<br/>
+Reboot the dockersoft-container.
+
+<Aside type="caution">
+Make sure to add new VLANs to trunks when needing a new VLAN
+</Aside>
+
+## Create VLAN in OPNsense
+### Connecting to OPNsense-WebUI
+Open and Login to `opnsense.yourdomain.com`
+
+### Create Interface
+* Go to `Interfaces > Other Types > VLAN`
+* Add VLAN by clicking the plus-button
+* Enter the following values
+* Hit 'safe' and then 'apply'
+
+#### Interfacesetting
+<Tabs>
+    <TabItem label="Edit VLAN">
+        Device          -   vlan0.103 ( vlan0.\<VLAN_ID> )<br/>
+        Parent          -   vtnet1<br/>
+        VLAN tag        -   103<br/>
+        VLAN priority   -   Default<br/>
+        Description     -   103_dockge ( \<VLAN_ID>_\<NAME_FOR_THE_VLAN> )<br/>
+    </TabItem>
+</Tabs>
+
+### Adding the new interface
+* Go to `Interfaces > Assignments`
+* Select your new VLAN in "Assign a new interface" you just create
+* Provide a description (Use the same description as above - Example: 103_dockge)
+* Click the `Add`-button
+
+### Enable of the new interface
+* Go to `Interfaces > [Your Interface]` (example proxy: 103_dockge)
+* Enable the Interface
+* Select under `Generic configuration` the "IPv4 Configuration Type" from "none" to "Static IPv4"
+* Enter the IP address for the Proxmox Gateway under “Static IPv4 configuration” (example dockge: 10.1.3.1)
+* Choose your Subnet to 24
+* Hit Safe and Apply changes
+
+### Update RFC1918-Rules
+* Go to `Firewall > Aliases`
+* Edit the `RFC1918-rule` by clicking the pen
+* Add content `__opt4_network` (In future all those beginning with __, but the number can be different)
+* Hit Safe and Apply
+
+### Add Rule RFC1918 to Interface
+We will use RFC1918 to configure firewall rules for internet access.
+If you want to give internet access to a vlan but still restrict access to all other internal IPs
+you can do that with the help of a firewall rule that accepts all connections except if they target RFC1918.
+
+* Go to "Firewall > Rules"
+* Select the VLAN you want to grant internet access
+* Create a new rule if it doesnt already exist by hitting the plus.
+
+We want to allow everything except if the destination is RFC1918.
+
+* Enable Destination / Invert.
+* Select RFC1918 as a destination
+* Select the Category (optional)
+* Safe and Apply Changes
+
+### Add Alias for proxy
+* Go to `Firewall > Aliases`
+* Hit the Plus-Symbol
+* Enter the name `dockge`
+* Choose type as `host(s)`
+* Selected content `10.1.3.2`
+* Hit Safe and Apply
+
+
