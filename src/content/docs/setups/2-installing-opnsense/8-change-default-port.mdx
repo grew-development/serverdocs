@@ -7,14 +7,6 @@ description: Change the defaultport from 443 to 9443
 import { Aside } from "@astrojs/starlight/components";
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-We change the default port of OPNsense to a custom one,<br/>
-as we will then forward everything that comes into our WAN input directly to our proxy manager
-
-* Go to `System > Settings > Administration`
-* Change the TCP port to `9443`
-* Hit 'safe'
-
-
 ## Reconnect to WebUI
 * Open Windows Terminal
 * Use the command: `ssh root@<yourIP4> -L 443:<WAN_IP4>:9443`
@@ -32,6 +24,19 @@ tunnel or you need to trubbleshoot make sure to disable the firewall again.<br/>
 THIS WILL HAPPEN A LOT DURING SETUP!
 </Aside>
 
+## Change default Port
+We change the default port of OPNsense to a custom one,<br/>
+as we will then forward everything that comes into our WAN input directly to our proxy manager
+
+* Go to `System > Settings > Administration`
+* Change the 'TCP port' to `9443`
+* Change 'Alternate Hostnames' to `opnsense.yourdomain.com`
+* Hit 'safe'
+
+## Change WAN-Settings
+* Go to `Interfaces > WAN > Basic configuration`
+* Enable 'Lock'-Option 
+* Hit 'safe'
 
 ## Create NAT-Rule
 We now also forward the default port from my WAN-Address here.
