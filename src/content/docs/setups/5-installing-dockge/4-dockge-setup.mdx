@@ -1,0 +1,38 @@
+---
+title: Dockge Setup
+author: Sven Rönnfranz alias Grewo
+description: Start the Setup for Dockge
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Login into Web-WebUI
+After creating your subdomain, you can now connect to the web interface.
+* Open `dockge.yourdomain.com`
+
+## Create Admin-Account
+After the page has loaded, you can create an admin account.<br/>
+
+To do this, enter your username, password and repeat your password.<br/>
+Then click on the create button.
+
+Congratulations, the main settings are done.
+But now we need to make some more settings
+
+
+### My assignment of the account
+* Username: I use `root`, but you can use the first letter of first name, then full surname separated by a period like `j.doe`
+* Password: Individual, 32-digit password with special characters like `ZPzEjqwY^$93Qrgf2oka&VvFWSja!WmU`
+
+## Dockge Variable awarding
+* Go to `dockge` in the sidebar
+* Edit this Container
+* Scrolle runter zum '.env-Bereich'
+* Copy the variable name into it and give it a value,<br/>
+as here: `"DOCKGE_EXTERNAL_IP" = dockge.grew-development.de`
+
+* Click Save
+
+Now we are ready to easily create further containers with additional functions.<br/>
+We will go into this in more detail in the next step
