@@ -100,6 +100,7 @@ export default defineConfig({
 					items: [
 						{ label: 'opnseense.yourdomain.com', link: '/subdomains/subdomain-opnsense' },
 						{ label: 'proxmox.yourdomain.com', link: '/subdomains/subdomain-proxmox' },
+						{ label: 'dockge.yourdomain.com', link: '/subdomains/subdomain-dockge' },
 					],
 				},
 				{
