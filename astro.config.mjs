@@ -110,6 +110,7 @@ export default defineConfig({
 									label: 'Installing Docker',
 									items: [
 										{ label: 'Creating Docker CT', link: '/setups/4-node1-container/1-installing-docker/1-creating-docker-ct' },
+										{ label: 'Setup Network for Docker', link: '/setups/4-node1-container/1-installing-docker/2-create-docker-vlan' },
 									]
 								},
 							],
