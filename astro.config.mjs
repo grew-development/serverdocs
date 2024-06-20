@@ -100,8 +100,17 @@ export default defineConfig({
 										{ label: 'Start Dockge-Container', link: '/setups/3-main-container/3-installing-dockge/3-start-dockgecontainer' },
 										{ label: 'Dockge Setup', link: '/setups/3-main-container/3-installing-dockge/4-dockge-setup' },
 									],
+								},
+							],
 						},
-									],
+						{
+							label: 'Node1 - Container (Priv-CT)',
+							items: [
+								{
+									label: 'Installing Docker',
+									items: [
+										{ label: 'Creating Docker CT', link: '/setups/4-node1-container/1-installing-docker/1-creating-docker-ct' },
+									]
 								},
 							],
 						},
