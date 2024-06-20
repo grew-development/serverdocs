@@ -8,13 +8,13 @@ import { Aside } from "@astrojs/starlight/components";
 import { LinkCard, CardGrid } from '@astrojs/starlight/components';
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Tailscale is a VPN like software that allows you to create virtual network between your devices.
-It also allows for simple in Browser SSH and Exit Node creation if you want to use your server as a VPN aswell.
-It also has a lot of other usefull features like file sharing and much more.
+Tailscale is a VPN like software that allows you to create virtual network between your devices.<br/>
+It also allows for simple in Browser SSH and Exit Node creation if you want to use your server as a VPN aswell.<br/>
+It also has a lot of other usefull features like file sharing and much more.<br/>
 
 <Aside type="note">
 This step is optional.<br/>
-However, I recommend this step because it allows secure and private access to your services or servers without opening any ports.
+However, I recommend this step because it allows secure and private access to your services or servers without opening any ports.<br/>
 You can also use it to access your devices from anywhere in the world for debugging purposes.
 </Aside>
 
@@ -61,9 +61,9 @@ Your OPNsense will now automatically be added to your tailscale, as soon as you 
 
 ## Activating Exit Node
 Even tho because of firewall rules Tailscale will not have internet access on the exit node for now you also need to make sure to allow the device to be used as an access node in the Tailscale `Admin Console`.
-There you can click the option buttons next to your device and go to `Edit route settings`.
-There you need to enable `Use as exit node`. This should be everything you need to do.
-Now it should be an available option as an exit node on for exampel your desktop or mobile device in the Tailscale app.
+There you can click the option buttons next to your device and go to `Edit route settings`.<br/>
+There you need to enable `Use as exit node`. This should be everything you need to do.<br/>
+Now it should be an available option as an exit node on for exampel your desktop or mobile device in the Tailscale app.<br/>
 
 ## Adding the tailscale-interface
 * Go to `Interfaces > Assignments`
@@ -83,8 +83,8 @@ Now it should be an available option as an exit node on for exampel your desktop
 * Hit Safe and Apply
 
 ## Add Rule RFC1918 to Interface
-We will use RFC1918 to configure firewall rules for internet access.
-If you want to give internet access to the tailscale-interface but still restrict access to all other internal IPs
+We will use RFC1918 to configure firewall rules for internet access.<br/>
+If you want to give internet access to the tailscale-interface but still restrict access to all other internal IPs<br/>
 you can do that with the help of a firewall rule that accepts all connections except if they target RFC1918.
 
 * Go to "Firewall > Rules"

@@ -8,14 +8,13 @@ import { Aside } from "@astrojs/starlight/components";
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## Configuring Trunks
-You will have to add a new trunk each time you want to connect a new VLAN to the Docker CT.
-For that its simmelar to the OPNSense setup.
-run the Commands in the proxmox-shell. You can edit the config with `vim` or `nano`.
+You will have to add a new trunk each time you want to connect a new VLAN to the Docker CT. For that its simmelar to the OPNSense setup.<br/>
+Run the Commands in the proxmox-shell. You can edit the config with `vim` or `nano`.
 ```
 nano /etc/pve/lxc/101.conf
 ```
 
-We will need to edit the line starting with `net0`: and add all your VLANS as trunks `trunks=102;103;...`
+We will need to edit the line starting with `net0`: and add all your VLANS as trunks `trunks=102;103;...`<br/>
 It should look like this after that
 ```
 net0: name=vlan0,bridge=vmbr1,firewall=1,hwaddr=BC:24:11:1C:45:19,type=veth,trunks=102;103;104;110;111
@@ -70,8 +69,7 @@ Open and Login to `opnsense.yourdomain.com`
 * Hit Safe and Apply
 
 ### Add Rule RFC1918 to Interface
-We will use RFC1918 to configure firewall rules for internet access.
-If you want to give internet access to a vlan but still restrict access to all other internal IPs
+We will use RFC1918 to configure firewall rules for internet access. If you want to give internet access to a vlan but still restrict access to all other internal IPs<br/>
 you can do that with the help of a firewall rule that accepts all connections except if they target RFC1918.
 
 * Go to "Firewall > Rules"

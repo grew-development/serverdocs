@@ -12,21 +12,20 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 * Use the command: `ssh root@<yourIP4> -L 443:<WAN_IP4>:9443`
 
 This will open up a tunnel. After that you should be able to reconnect via `https://localhost`.
-<Aside type="note">
-If you cannot reach the OPNSense make sure that the firewall is disabled in OPNSense.
+<Aside>
+    If you cannot reach the OPNSense make sure that the firewall is disabled in OPNSense.
 
-You can do so from Proxmox in the OPNSense console by selecting option 8.<br/>
-In the OPNSense console you can then type `pfctl -d` to disable the firewall.<br/>
-It will reenable after each apply you do inside of the OPNSense WebUI or by running `pfctl -e`.
-All Rules will be disabled when the firewall is disabled. If every you can’t reach OPNSense on the
-tunnel or you need to trubbleshoot make sure to disable the firewall again.<br/>
+    You can do so from Proxmox in the OPNSense console by selecting option 8.<br/>
+    In the OPNSense console you can then type `pfctl -d` to disable the firewall.<br/>
+    It will reenable after each apply you do inside of the OPNSense WebUI or by running `pfctl -e`.<br/>
+    All Rules will be disabled when the firewall is disabled.<br/>
+    If every you can’t reach OPNSense on the tunnel or you need to trubbleshoot make sure to disable the firewall again.<br/>
 
-THIS WILL HAPPEN A LOT DURING SETUP!
+    THIS WILL HAPPEN A LOT DURING SETUP!
 </Aside>
 
 ## Change default Port
-We change the default port of OPNsense to a custom one,<br/>
-as we will then forward everything that comes into our WAN input directly to our proxy manager
+We change the default port of OPNsense to a custom one, as we will then forward everything that comes into our WAN input directly to our proxy manager:
 
 * Go to `System > Settings > Administration`
 * Change the 'TCP port' to `9443`

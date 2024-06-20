@@ -12,20 +12,17 @@ If you did everything correct you should be able to startup the VM.<br/>
 Go to the `console-tab` to view the screen of opnsense.<br/>
 Click `Start Now`.
 
-Wait until the opnsense installer finishes loading and prompts you with a login. Dont press any other
-buttons during installation otherwise you might need to restart the VM.
+Wait until the opnsense installer finishes loading and prompts you with a login. Dont press any other buttons during installation otherwise you might need to restart the VM.
 
-Because we want to install opnsense we use `installer` as a username to login and `opnsense` as the
-default password.
+Because we want to install opnsense we use `installer` as a username to login and `opnsense` as the default password.
 
-The OPNSense Installer will now prompt you with a keymap selection. I selected the `German keymap`,
-because I have a german keyboard. If you want to you can test your keymap at the top of the
-selection. If you are sure you selected the right keymap you can continue.
+The OPNSense Installer will now prompt you with a keymap selection. I selected the `German keymap`, because I have a german keyboard.<br/>
+If you want to you can test your keymap at the top of the selection. If you are sure you selected the right keymap you can continue.
 
 <Aside type="caution">
-If you select a wrong keymap you may have problems later when entering a password for your root user.
-Because some special symbols can be interpreted differently on different keymaps.
-This can lead to your login only working in the console not the OPNSense WebUI later on.
+    If you select a wrong keymap you may have problems later when entering a password for your root user.<br/>
+    Because some special symbols can be interpreted differently on different keymaps.<br/>
+    This can lead to your login only working in the console not the OPNSense WebUI later on.
 </Aside>
 
 Next you have to choose how you want to install opnsense. I used ZFS but you can choose what you like.
@@ -34,7 +31,7 @@ After that we select a `stripe installation` because our proxmox has already rai
 
 It will then prompt you to select your drive with spacebar and than enter for confirm.
 
-It will ask you one more time to confirm because you will overwrite everything on the drive.
+It will ask you one more time to confirm because you will overwrite everything on the drive.<br/>
 Because its only an empty virtual drive we can safely continue by selecting `Yes`.
 
 After that the installation should start. This will take a few minutes depending on your server performance.
@@ -43,22 +40,19 @@ After the main installation finished it will prompt you to reset your root passw
 I selected a secure password for my root user.
 
 <Aside type="note">
-Make sure to remember that password. You will need to enter it in the WebUI and in the opnsense console sometimes.<br/>
-If you forget your password, you will have to reset your entire OPNSense
+    Make sure to remember that password. You will need to enter it in the WebUI and in the opnsense console sometimes.<br/>
+    If you forget your password, you will have to reset your entire OPNSense
 </Aside>
 
 After that you can select Complete Install to finish the installation.<br/>
 This will reboot the VM and start of the actual drive now and not the ISO anymore.
 
 ## Post-Installing
-After the installation I like to stop the VM and remove the install ISO<br/>
-so that it will not accidential run again at some point or time.
+After the installation I like to stop the VM and remove the install ISO so that it will not accidential run again at some point or time.
 
 Currently we can't just stop the VM in proxmox (because of the missing qemu-agent).<br/>
-So you will have to wait till opnsense starts to login (as root and with your currently specified password) and<br/>
-shutdown from the console. You can do so by choosing option 5.
+So you will have to wait till opnsense starts to login (as root and with your currently specified password) and shutdown from the console. You can do so by choosing option 5.
 
-After that, you can go to the hardware and remove the installation ISO from the CD/DVD Drive and<br/>
-then restart the VM for the next steps.
+After that, you can go to the hardware and remove the installation ISO from the CD/DVD Drive and then restart the VM for the next steps.
 
 You should now have the basic installation running on your server.

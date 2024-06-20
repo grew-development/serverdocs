@@ -7,8 +7,7 @@ description: Wizard Setup in OPNSense
 import { Aside } from "@astrojs/starlight/components";
 
 To run the Wizzard we need to connect to the OPNSense WebUI.<br/>
-We could connect via our public IPv4, but opnsense won’t allow it<br/>
-because it tries to connect from DNS Rebind Attacks and thus will block the login.
+We could connect via our public IPv4, but opnsense won’t allow it because it tries to connect from DNS Rebind Attacks and thus will block the login.
 
 ## Connecting to WebUI
 You can connect to OPNSense via a SSH-Tunnel.
@@ -16,19 +15,19 @@ You can connect to OPNSense via a SSH-Tunnel.
 * Open Windows Terminal
 * Use the command: `ssh root@<yourIP4> -L 443:<WAN_IP4>:443`
 
-This will open up a tunnel. After that you should be able to connect via `https://localhost`.
-To setup everything important I recommend running the setup wizard. It will configure some important things needed for further configuration
+This will open up a tunnel. After that you should be able to connect via `https://localhost`. To setup everything important I recommend running the setup wizard.<br/>
+It will configure some important things needed for further configuration
 
 <Aside>
-If you cannot reach the OPNSense make sure that the firewall is disabled in OPNSense.
+    If you cannot reach the OPNSense make sure that the firewall is disabled in OPNSense.
 
-You can do so from Proxmox in the OPNSense console by selecting option 8.<br/>
-In the OPNSense console you can then type `pfctl -d` to disable the firewall.<br/>
-It will reenable after each apply you do inside of the OPNSense WebUI or by running `pfctl -e`.
-All Rules will be disabled when the firewall is disabled. If every you can’t reach OPNSense on the
-tunnel or you need to trubbleshoot make sure to disable the firewall again.<br/>
+    You can do so from Proxmox in the OPNSense console by selecting option 8.<br/>
+    In the OPNSense console you can then type `pfctl -d` to disable the firewall.<br/>
+    It will reenable after each apply you do inside of the OPNSense WebUI or by running `pfctl -e`.<br/>
+    All Rules will be disabled when the firewall is disabled.<br/>
+    If every you can’t reach OPNSense on the tunnel or you need to trubbleshoot make sure to disable the firewall again.<br/>
 
-THIS WILL HAPPEN A LOT DURING SETUP!
+    THIS WILL HAPPEN A LOT DURING SETUP!
 </Aside>
 
 In the WebUI you can login to your OPNSense with the password you selected during installation or<br/>
@@ -57,8 +56,7 @@ You can let it stay as is.
 After that you can hit Next again.
 
 On the next page you will have the chance to change your root password again.<br/>
-If you did not already change it during installation do it now! If you already changed it you can just
-leave it empty.
+If you did not already change it during installation do it now! If you already changed it you can just leave it empty.
 
 To finish off the setup with the Wizzard you can hit `Next` again and after that `Reload`.<br/>
 This will reload the OPNSense. If you cannot reach the WebUI after the reload make sure the firewall

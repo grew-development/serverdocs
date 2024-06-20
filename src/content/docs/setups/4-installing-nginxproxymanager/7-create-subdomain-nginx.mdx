@@ -110,25 +110,24 @@ If the host you have just created has the `status "Online"`, everything has work
 Now we should delete the temporarily created NAT rule from port 81.
 
 ## Connecting to OPNsense-WebUI
-We would like to create a temporary firewall rule to access the WebUI via port 81.
-To do this, first open opnsense via your SSH-Tunnel.
+We would like to create a temporary firewall rule to access the WebUI via port 81. To do this, first open opnsense via your SSH-Tunnel.
 
 * Open Windows Terminal
 * Use the command: `ssh root@<yourIP4> -L 443:<WAN_IP4>:9443`
 
-This will open up a tunnel. After that you should be able to connect via `https://localhost`.
-To setup everything important I recommend running the setup wizard. It will configure some important things needed for further configuration
+This will open up a tunnel. After that you should be able to connect via `https://localhost`. To setup everything important I recommend running the setup wizard.<br/>
+It will configure some important things needed for further configuration
 
 <Aside>
-If you cannot reach the OPNSense make sure that the firewall is disabled in OPNSense.
+    If you cannot reach the OPNSense make sure that the firewall is disabled in OPNSense.
 
-You can do so from Proxmox in the OPNSense console by selecting option 8.<br/>
-In the OPNSense console you can then type `pfctl -d` to disable the firewall.<br/>
-It will reenable after each apply you do inside of the OPNSense WebUI or by running `pfctl -e`.
-All Rules will be disabled when the firewall is disabled. If every you can’t reach OPNSense on the
-tunnel or you need to trubbleshoot make sure to disable the firewall again.<br/>
+    You can do so from Proxmox in the OPNSense console by selecting option 8.<br/>
+    In the OPNSense console you can then type `pfctl -d` to disable the firewall.<br/>
+    It will reenable after each apply you do inside of the OPNSense WebUI or by running `pfctl -e`.<br/>
+    All Rules will be disabled when the firewall is disabled.<br/>
+    If every you can’t reach OPNSense on the tunnel or you need to trubbleshoot make sure to disable the firewall again.<br/>
 
-THIS WILL HAPPEN A LOT DURING SETUP!
+    THIS WILL HAPPEN A LOT DURING SETUP!
 </Aside>
 
 ### Delete NAT-Rule with Port 81
@@ -137,7 +136,6 @@ THIS WILL HAPPEN A LOT DURING SETUP!
 * Hit 'Yes' and then 'apply'
 
 <Aside type="tip">
-Now I will create more subdomains, for example for my Proxmox, opnsense and Dockge.
-However, I have created a separate area for this.
-You can find this area under [`Subdomains`](../../subdomains/subdomain-opnsense).
+    Now I will create more subdomains, for example for my Proxmox, opnsense and Dockge. However, I have created a separate area for this.<br/>
+    You can find this area under [`Subdomains`](../../subdomains/subdomain-opnsense).
 </Aside>

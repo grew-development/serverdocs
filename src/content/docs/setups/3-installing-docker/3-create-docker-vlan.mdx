@@ -7,9 +7,7 @@ description: Setup the Networksettings for docker-ct
 import { Aside } from "@astrojs/starlight/components";
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 
-Now before we create Docker and everything else, we need to make sure that our container has internet.
-To do this, we need to enable this in our firewall.
-
+Now before we create Docker and everything else, we need to make sure that our container has internet. To do this, we need to enable this in our firewall.<br/>
 That's why I first create my VLAN in OPNsense and then check whether the server really has access to the internet.
 
 ## Connecting to OPNsense-WebUI
@@ -18,23 +16,24 @@ You can connect to OPNSense via a SSH-Tunnel.
 * Open Windows Terminal
 * Use the command: `ssh root@<yourIP4> -L 443:<WAN_IP4>:9443`
 
-This will open up a tunnel. After that you should be able to connect via `https://localhost`.
+This will open up a tunnel. After that you should be able to connect via `https://localhost`.<br/>
 To setup everything important I recommend running the setup wizard. It will configure some important things needed for further configuration
 
 <Aside>
-If you cannot reach the OPNSense make sure that the firewall is disabled in OPNSense.
+    If you cannot reach the OPNSense make sure that the firewall is disabled in OPNSense.
 
-You can do so from Proxmox in the OPNSense console by selecting option 8.<br/>
-In the OPNSense console you can then type `pfctl -d` to disable the firewall.<br/>
-It will reenable after each apply you do inside of the OPNSense WebUI or by running `pfctl -e`.
-All Rules will be disabled when the firewall is disabled. If every you can’t reach OPNSense on the
-tunnel or you need to trubbleshoot make sure to disable the firewall again.<br/>
+    You can do so from Proxmox in the OPNSense console by selecting option 8.<br/>
+    In the OPNSense console you can then type `pfctl -d` to disable the firewall.<br/>
+    It will reenable after each apply you do inside of the OPNSense WebUI or by running `pfctl -e`.<br/>
+    All Rules will be disabled when the firewall is disabled.<br/>
+    If every you can’t reach OPNSense on the tunnel or you need to trubbleshoot make sure to disable the firewall again.<br/>
 
-THIS WILL HAPPEN A LOT DURING SETUP!
+    THIS WILL HAPPEN A LOT DURING SETUP!
 </Aside>
 
-In the WebUI you can login to your OPNSense with the password you selected during installation or<br/>
-the default password `opnsense` if you did not configure a password during installation.<br/>
+In the WebUI you can login to your OPNSense with the password you selected during installation or the default password `opnsense`<br/>
+if you did not configure a password during installation.
+
 The Username is `root`
 
 ## Create Interface
@@ -75,8 +74,8 @@ The Username is `root`
 * Hit Safe and Apply
 
 ## Add Rule RFC1918 to Interface
-We will use RFC1918 to configure firewall rules for internet access.
-If you want to give internet access to a vlan but still restrict access to all other internal IPs
+We will use RFC1918 to configure firewall rules for internet access.<br/>
+If you want to give internet access to the tailscale-interface but still restrict access to all other internal IPs<br/>
 you can do that with the help of a firewall rule that accepts all connections except if they target RFC1918.
 
 * Go to "Firewall > Rules"

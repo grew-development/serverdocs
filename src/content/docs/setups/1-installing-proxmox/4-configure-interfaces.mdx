@@ -7,10 +7,9 @@ description: Setup for the Network Interfaces
 import { Aside } from "@astrojs/starlight/components";
 
 <Aside type="note">
-I wanted to use VLANs on my server to be able to seperate everything as much as possible even if its
-maby a bit over the top. I started by configuring a vmbr0 bridge for WAN and internet access for the
-opnsense later. I also added a vmbr1 bridge for the VLANs later. I used a ovs bridge which you have
-to install first.
+    I wanted to use VLANs on my server to be able to seperate everything as much as possible even if its maby a bit over the top.
+    <br/>I started by configuring a vmbr0 bridge for WAN and internet access for the opnsense later.
+    <br/>I also added a vmbr1 bridge for the VLANs later. I used a ovs bridge which you have to install first.
 </Aside>
 
 You can now carry out the following steps from your proxmox shell which you can access in the
@@ -21,10 +20,8 @@ apt update
 apt upgrade
 apt install openvswitch-switch
 ```
-If you want to copy my config look her [/etc/network/interfaces](../../configs/proxmox/etc-network-interfaces).<br/> 
-There you will find my exact config to copy.<br/>
-But remember the values you read beforehand<br/>
-You will have to adjust your ip4 and gateway to the ones given to you from proxmox.<br/>
+If you want to copy my config look her [/etc/network/interfaces](../../configs/proxmox/etc-network-interfaces). There you will find my exact config to copy.<br/>
+But remember the values you read beforehand You will have to adjust your ip4 and gateway to the ones given to you from proxmox.<br/>
 To copy this config just use `vim` or `nano`<br/>
 
 ```
@@ -32,14 +29,13 @@ nano /etc/network/interfaces
 reboot
 ```
 <Aside type="note">
-**NANO**<br/>
-You can safe the changes with `ctlr + o` and exit the file with `ctlr + x`<br/>
+    **NANO**<br/>
+    You can safe the changes with `ctlr + o` and exit the file with `ctlr + x`<br/>
 
-**VIM**<br/>
-You can safe the changes with `press Esc key | Type ":w" | press ENTER key` and<br/>
-exit the file with `press Esc key | Type ":q" | press ENTER key` <br/>
+    **VIM**<br/>
+    You can safe the changes with `press Esc key | Type ":w" | press ENTER key` and exit the file with `press Esc key | Type ":q" | press ENTER key`
 </Aside>
 <Aside type="danger">
-MAKE SURE THE VALUES ARE CORRECT OTHERWISE YOU WILL NOT REACH THE SERVER ON THE
-IP ANYMORE (HETZNER RESCUE MODE TO YOUR HELP)
+    MAKE SURE THE VALUES ARE CORRECT OTHERWISE YOU WILL NOT REACH THE SERVER ON THE
+    IP ANYMORE (HETZNER RESCUE MODE TO YOUR HELP)
 </Aside>

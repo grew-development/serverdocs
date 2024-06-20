@@ -22,6 +22,9 @@ export default defineConfig({
 				}
 			},
 			//*/
+			customCss: [
+				'./src/assets/css/main.css',
+			],
 			social: {
 				github: 'https://github.com/grew-development/serverdocs',
 				email: 'mailto:info@grew-development.de',
