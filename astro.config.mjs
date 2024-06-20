@@ -120,6 +120,8 @@ export default defineConfig({
 									items: [
 										{ label: 'Create DockerCompose-File', link: '/setups/4-node1-container/2-installing-dockge/1-create-composefile' },
 										{ label: 'Setup Network', link: '/setups/4-node1-container/2-installing-dockge/2-setup-network' },
+										{ label: 'Start Dockge-Container', link: '/setups/4-node1-container/2-installing-dockge/3-start-dockgecontainer' },
+										{ label: 'Dockge Setup', link: '/setups/4-node1-container/2-installing-dockge/4-dockge-setup' },
 									],
 								},
 							],

@@ -1,0 +1,111 @@
+---
+title: Dockge Setup
+author: Sven Rönnfranz alias Grewo
+description: Start the Setup for Dockge
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+## Create temporary firewall rule
+### Connecting to OPNsense-WebUI
+Open and Login to `opnsense.yourdomain.com`
+
+### Create NAT-Rule
+* Go to `Firewall > NAT > Port Forward`
+* Add Rule by clicking the plus-button
+* Enter the following values
+* Hit 'safe' and then 'apply'
+
+#### NATrule-Settings
+<Tabs>
+    <TabItem label="tailscale port">
+        Interface               -   TAILSCALE<br/>
+        Destination / Invert    -   false<br/>
+        Destination             -   TAILSCALE_ADDRESS<br/>
+        Destination port from   -   (other) 5001<br/>
+        Destination port to     -   (other) 5001<br/>
+        Redirect Target IP      -   Dockge_202-Alias (IP: 10.2.2.2)<br/>
+        Redirect Target Port    -   (other) 5001<br/>
+        Description             -   `TEMP!!!`<br/>
+    </TabItem>
+    <TabItem label="public port">
+        Interface               -   WAN<br/>
+        Destination / Invert    -   false<br/>
+        Destination             -   WAN_ADDRESS<br/>
+        Destination port from   -   (other) 5001<br/>
+        Destination port to     -   (other) 5001<br/>
+        Redirect Target IP      -   Dockge_202-Alias (IP: 10.2.2.2)<br/>
+        Redirect Target Port    -   (other) 5001<br/>
+        Description             -   `TEMP!!!`<br/>
+    </TabItem>
+</Tabs>
+
+## Login into Web-WebUI
+After creating your subdomain, you can now connect to the web interface.
+* Open `http://tailscale_opnsense_ip:5001`
+
+## Create Admin-Account
+After the page has loaded, you can create an admin account.<br/>
+
+To do this, enter your username, password and repeat your password.<br/>
+Then click on the create button.
+
+Congratulations, the main settings are done.
+But now we need to make some more settings
+
+
+### My assignment of the account
+* Username: I use `root`, but you can use the first letter of first name, then full surname separated by a period like `j.doe`
+* Password: Individual, 32-digit password with special characters like `ZPzEjqwY^$93Qrgf2oka&VvFWSja!WmU`
+
+## Dockge Variable awarding
+* Go to `dockge` in the sidebar
+* Edit this Container
+* Scroll down to '.env-Area'
+* Copy the variable name into it and give it a value,<br/>
+as here: `DOCKGE_EXTERNAL_IP= https://dockge.yourdomain.com`
+
+* Click Save
+
+## Connect Node-1 Dockge as Agent
+Now we are ready to connect this Dockge to our Dockge from Dockersoft. To do this, we take the following steps.
+
+### Delete temporary firewall rule
+* Go to `Firewall > NAT > Port Forward`
+* Delete the TEMP-Rule by clicking the dash-button
+* Hit 'apply'
+
+### Create NAT-Rule
+* Go to `Firewall > NAT > Port Forward`
+* Add Rule by clicking the plus-button
+* Enter the following values
+* Hit 'safe' and then 'apply'
+
+<Tabs>
+    <TabItem label="Edit Redirect entry">
+        Interface               -   103_dockge<br/>
+        Destination / Invert    -   false<br/>
+        Destination             -   Dockge_202-Alias (IP: 10.2.2.2)<br/>
+        Destination port from   -   (other) 5001<br/>
+        Destination port to     -   (other) 5001<br/>
+        Redirect Target IP      -   Dockge_202-Alias (IP: 10.2.2.2)<br/>
+        Redirect Target Port    -   (other) 5001<br/>
+        Description             -   Clear this!<br/>
+        Filter rule association -   none<br/>
+    </TabItem>
+</Tabs>
+
+### 
+* Open and Login to `dockge.yourdomain.com`
+* Click `Add Agent`-Button
+* Enter the following values
+* Hit `connect`-button
+
+<Tabs>
+    <TabItem label="Add Agent">
+        Dockge URL  -   http://10.2.2.2:5001 (Your Node1-Dockge-IP with Port 5001)<br/>
+        Username    -   your username from Node1-Dockge<br/>
+        Password    -   your password from Node1-Dockge<br/>
+    </TabItem>
+</Tabs>
