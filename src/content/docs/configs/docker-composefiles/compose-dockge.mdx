@@ -26,19 +26,19 @@ services:
       - homepage.icon=dockge.png
       - homepage.href=${DOCKGE_EXTERNAL_IP}
     networks:
-      vlan103_net:
-        ipv4_address: 10.1.3.2
+      vlan103_net: #changeme
+        ipv4_address: 10.1.3.2 #changeme
 networks:
-  vlan103_net:
+  vlan103_net: #changeme
     driver: ipvlan
     driver_opts:
       mode: l2
-      subnet: 10.1.3.0/24
-      parent: eth0.103
+      subnet: 10.1.3.0/24 #changeme
+      parent: eth0.103 #changeme
     ipam:
       config:
-        - subnet: 10.1.3.0/24
-          gateway: 10.1.3.1
+        - subnet: 10.1.3.0/24 #changeme
+          gateway: 10.1.3.1 #changeme
 x-dockge:
   urls:
     - ${DOCKGE_EXTERNAL_IP}
