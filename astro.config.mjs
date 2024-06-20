@@ -133,6 +133,12 @@ export default defineConfig({
 										{ label: 'Pterodactyl-Panel Setup', link: '/setups/4-node1-container/3-installing-pterodactyl/4-pterodactyl-panel-setup' },
 									],
 								},
+								{
+									label: 'Installing Pterodactyl Wing',
+									items: [
+										{ label: 'Create DockerCompose-File', link: '/setups/4-node1-container/4-installing-pterodactyl-wing/1-create-composefile' },
+									],
+								},
 							],
 						},
 					],
@@ -161,6 +167,7 @@ export default defineConfig({
 								{ label: 'NGINX File', link: '/configs/docker-composefiles/compose-nginx' },
 								{ label: 'Dockge File', link: '/configs/docker-composefiles/compose-dockge' },
 								{ label: 'Pterodactyl-Panel File', link: '/configs/docker-composefiles/compose-pterodactyl' },
+								{ label: 'Pterodactyl-Wing File', link: '/configs/docker-composefiles/compose-pterodactyl-wing' },
 							],
 						},
 					],
