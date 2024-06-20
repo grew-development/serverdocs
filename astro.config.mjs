@@ -128,6 +128,7 @@ export default defineConfig({
 									label: 'Installing Pterodactyl Panel',
 									items: [
 										{ label: 'Create DockerCompose-File', link: '/setups/4-node1-container/3-installing-pterodactyl/1-create-composefile' },
+										{ label: 'Setup Network', link: '/setups/4-node1-container/3-installing-pterodactyl/2-setup-network' },
 									],
 								},
 							],
