@@ -115,6 +115,12 @@ export default defineConfig({
 										{ label: 'Tailscale Installer', link: '/setups/4-node1-container/1-installing-docker/4-tailscale-installer' },
 									]
 								},
+								{
+									label: 'Installing Dockge',
+									items: [
+										{ label: 'Create DockerCompose-File', link: '/setups/4-node1-container/2-installing-dockge/1-create-composefile' },
+									],
+								},
 							],
 						},
 					],
