@@ -1,0 +1,25 @@
+---
+title: Install Docker
+author: Sven Rönnfranz alias Grewo
+description: Install the dockersoftware in your docker-ct
+---
+
+import { Aside } from "@astrojs/starlight/components";
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Before we install our docker software, we should perform a small update.<br/>
+To do this we simply use the get Docker script.
+
+* Run `apt update`
+* Run `apt upgrade -y`
+* Run `apt install curl -y`
+<br/>
+
+Now you can install docker
+```
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh (Shows you the current installation status)
+```
+<br/>
+
+You can verify the installation with `docker ps`
