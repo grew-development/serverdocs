@@ -1,0 +1,90 @@
+---
+title: DockerCompose-File - Pterodactyl
+author: Sven Rönnfranz alias Grewo
+description: Create the DockerCompose-File
+---
+This is the dockercompose-file for Pterodactyl-Panel-Container
+
+```
+version: "3.8"
+services:
+  database:
+    image: mariadb:10.5
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - /srv/pterodactyl/database:/var/lib/mysql
+    environment:
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: panel
+      MYSQL_USER: pterodactyl
+    networks:
+      vlan104_net: #changeme
+        ipv4_address: 10.1.4.4 #changeme
+  cache:
+    image: redis:alpine
+    restart: unless-stopped
+    networks:
+      vlan104_net: #changeme
+        ipv4_address: 10.1.4.3 #changeme
+  panel:
+    image: ghcr.io/pterodactyl/panel:latest
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      vlan104_net: #changeme
+        ipv4_address: 10.1.4.2 #changeme
+    links:
+      - database
+      - cache
+    volumes:
+      - /srv/pterodactyl/var/:/app/var/
+      - /srv/pterodactyl/nginx/:/etc/nginx/http.d/
+      - /srv/pterodactyl/certs/:/etc/letsencrypt/
+      - /srv/pterodactyl/logs/:/app/storage/logs
+    environment:
+      APP_URL: ${APP_URL}
+      APP_TIMEZONE: UTC
+      APP_SERVICE_AUTHOR: ${APP_SERVICE_AUTHOR}
+      MAIL_FROM: ${MAIL_FROM}
+      MAIL_DRIVER: ${MAIL_DRIVER}
+      MAIL_HOST: ${MAIL_HOST}
+      MAIL_PORT: ${MAIL_PORT}
+      MAIL_USERNAME: ${MAIL_USERNAME}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
+      MAIL_ENCRYPTION: "true"
+      DB_PASSWORD: ${MYSQL_PASSWORD}
+      APP_ENV: production
+      APP_ENVIRONMENT_ONLY: "false"
+      CACHE_DRIVER: redis
+      SESSION_DRIVER: redis
+      QUEUE_DRIVER: redis
+      REDIS_HOST: cache
+      DB_HOST: database
+      DB_PORT: "3306"
+    labels:
+      homepage.group: Docker
+      homepage.name: Pterodactyl-Panel
+      homepage.icon: pterodactyl.png
+      homepage.href: ${APP_URL}
+      homepage.widget.type: pterodactyl
+      homepage.widget.url: ${PTERODACTYL_INTERAL_IP}
+      homepage.widget.key: ${PTERODACTYL_KEY}
+networks:
+  vlan104_net: #changeme
+    driver: ipvlan
+    driver_opts:
+      mode: l2
+      subnet: 10.1.4.0/24 #changeme
+      parent: eth0.104 #changeme
+    ipam:
+      config:
+        - subnet: 10.1.4.0/24 #changeme
+          gateway: 10.1.4.1 #changeme
+x-dockge:
+  urls:
+    - ${APP_URL}
+```
