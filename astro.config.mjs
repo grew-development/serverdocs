@@ -142,6 +142,7 @@ export default defineConfig({
 						{ label: 'opnseense.yourdomain.com', link: '/subdomains/subdomain-opnsense' },
 						{ label: 'proxmox.yourdomain.com', link: '/subdomains/subdomain-proxmox' },
 						{ label: 'dockge.yourdomain.com', link: '/subdomains/subdomain-dockge' },
+						{ label: 'webui.yourdomain.com', link: '/subdomains/subdomain-peterodactyl-panel' },
 					],
 				},
 				{
