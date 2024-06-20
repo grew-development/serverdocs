@@ -137,6 +137,7 @@ export default defineConfig({
 									label: 'Installing Pterodactyl Wing',
 									items: [
 										{ label: 'Create DockerCompose-File', link: '/setups/4-node1-container/4-installing-pterodactyl-wing/1-create-composefile' },
+										{ label: 'Create Configure-File', link: '/setups/4-node1-container/4-installing-pterodactyl-wing/2-create-configurefile' },
 									],
 								},
 							],
@@ -150,6 +151,7 @@ export default defineConfig({
 						{ label: 'proxmox.yourdomain.com', link: '/subdomains/subdomain-proxmox' },
 						{ label: 'dockge.yourdomain.com', link: '/subdomains/subdomain-dockge' },
 						{ label: 'webui.yourdomain.com', link: '/subdomains/subdomain-peterodactyl-panel' },
+						{ label: 'node1.yourdomain.com', link: '/subdomains/subdomain-node1' },
 					],
 				},
 				{
