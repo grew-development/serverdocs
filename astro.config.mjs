@@ -128,6 +128,7 @@ export default defineConfig({
 									label: 'Installing Container',
 									items: [
 										{ label: 'Create DockerCompose-File', link: '/setups/4-node1-container/3-installing-container/1-create-composefile' },
+										{ label: 'Setup Network', link: '/setups/4-node1-container/3-installing-container/2-setup-network' },
 									],
 								},
 							],
