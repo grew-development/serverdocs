@@ -129,6 +129,7 @@ export default defineConfig({
 									items: [
 										{ label: 'Create DockerCompose-File', link: '/setups/4-node1-container/3-installing-container/1-create-composefile' },
 										{ label: 'Setup Network', link: '/setups/4-node1-container/3-installing-container/2-setup-network' },
+										{ label: 'Start Dockge-Container', link: '/setups/4-node1-container/3-installing-container/3-start-dockgecontainer' },
 									],
 								},
 							],
@@ -141,8 +142,7 @@ export default defineConfig({
 						{ label: 'opnseense.yourdomain.com', link: '/subdomains/subdomain-opnsense' },
 						{ label: 'proxmox.yourdomain.com', link: '/subdomains/subdomain-proxmox' },
 						{ label: 'dockge.yourdomain.com', link: '/subdomains/subdomain-dockge' },
-						{ label: 'webui.yourdomain.com', link: '/subdomains/subdomain-peterodactyl-panel' },
-						{ label: 'node1.yourdomain.com', link: '/subdomains/subdomain-node1' },
+						{ label: 'dbase.yourdomain.com', link: '/subdomains/subdomain-dbase-dcpriv' },
 					],
 				},
 				{
