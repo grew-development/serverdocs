@@ -1,0 +1,78 @@
+---
+title: DockerCompose-File - DCBot Privat
+author: Sven Rönnfranz alias Grewo
+description: Create the DockerCompose-File
+---
+This is the dockercompose-file for my DCBot Private Container
+
+```
+version: "3.8"
+services:
+  gdnbot: #changeme
+    container_name: GDN-Bot #changeme
+    image: openjdk:22
+    restart: unless-stopped
+    volumes:
+      - ./GDN.jar:/app/GDN.jar #changeme
+    working_dir: /app
+    links:
+      - mysql
+    entrypoint: java -jar GDN.jar #changeme
+    networks:
+      vlan203_net: #changeme
+        ipv4_address: 10.2.3.2 #changeme
+  gdntbot: #changeme
+    container_name: GDN-Ticket-Bot #changeme
+    image: openjdk:22
+    restart: unless-stopped
+    volumes:
+      - ./GDNT.jar:/app/GDNT.jar #changeme
+    working_dir: /app #changeme
+    links:
+      - mysql
+    entrypoint: java -jar GDNT.jar #changeme
+    networks:
+      vlan203_net: #changeme
+        ipv4_address: 10.2.3.3 #changeme
+  mysql:
+    container_name: DBase-MySQL #changeme
+    image: mysql
+    restart: unless-stopped
+    volumes:
+      - ./db_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PW}
+    networks:
+      vlan203_net: #changeme
+        ipv4_address: 10.2.3.4 #changeme
+  phpmyadmin:
+    container_name: phpMyAdmin #changeme
+    image: phpmyadmin:latest
+    restart: unless-stopped
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      #PMA_USER: ${PMA_ROOT_USER}
+      #PMA_PASSWORD: ${MYSQL_ROOT_PW}
+    ports:
+      - 80:80
+    networks:
+      vlan203_net: #changeme
+        ipv4_address: 10.2.3.5 #changeme
+networks:
+  vlan203_net: #changeme
+    driver: ipvlan
+    driver_opts:
+      mode: l2
+      subnet: 10.2.3.0/24 #changeme
+      parent: eth0.203 #changeme
+    ipam:
+      config:
+        - subnet: 10.2.3.0/24 #changeme
+          gateway: 10.2.3.1 #changeme
+x-dockge:
+  urls:
+    - https://dbase.yourdomain.com #changeme
+```
